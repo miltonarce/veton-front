@@ -4,6 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import {URL_IMAGES} from "../../../Utils/globals";
 
 const ItemUser = ({ name, last_name, email, image, onUserSelected }) => (
     <ListItem button alignItems="flex-start" onClick={onUserSelected}>
@@ -12,7 +13,7 @@ const ItemUser = ({ name, last_name, email, image, onUserSelected }) => (
                 alt={name}
                 src={
                     image
-                        ? `http://api.veton/imgs/${image}`
+                        ? `${URL_IMAGES}${image}`
                         : "https://via.placeholder.com/300x200"
                 }
             />
