@@ -22,8 +22,7 @@ const Main = () => {
         render={props => <User {...props} />}
       />
       <RouteAuth auth={logged} component={Veterinary} path="/veterinary" />
-      <RouteAuth auth={logged} component={Veterinary} path="/admin-vet" />
-      <RouteAuth auth={logged} component={Admin} path="/admin" />
+      <RouteAuth auth={logged} component={Admin} path="/admin-vet" />
     </Switch>
   );
 };
