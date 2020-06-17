@@ -12,4 +12,7 @@ export default {
         width: "100%",
         marginTop: "2rem",
     },
+    Select: {
+        width: "100%",
+      },
 };

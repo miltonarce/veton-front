@@ -55,7 +55,7 @@ const ListConsultations = ({ consultations }) => {
 };
 
 Consultation.propTypes = {
-  consultations: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  consultations: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 export default ListConsultations;

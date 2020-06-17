@@ -16,6 +16,7 @@ import {
   PetLink,
   ButtonDetailsPet
 } from "./styles";
+import {URL_IMAGES} from "../../../Utils/globals";
 
 const Pet = ({ id_pet, name, last_name, image, birthday, weight, comments }) => {
   const {
@@ -29,7 +30,7 @@ const Pet = ({ id_pet, name, last_name, image, birthday, weight, comments }) => 
           alt={name}
           component="img"
           src={
-            image ? `http://api.veton/imgs/${image}` : "/assets/no-image.png"
+            image ? `${URL_IMAGES}${image}` : "/assets/no-image.png"
           }
           title={`Mascota ${name}`}
         />

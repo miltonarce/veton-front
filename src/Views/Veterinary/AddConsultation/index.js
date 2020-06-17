@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Container,
   Grid,
@@ -7,15 +7,43 @@ import {
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import { ConsultationForm } from "../../../Components/Consultations";
-import { ApiVet } from "../../../Services";
+import { ApiVet, Api } from "../../../Services";
 import TitlePages from "../../../Components/Shared/TitlePages";
 import { AppContext } from "../../../Store";
 
 const AddConsultation = props => {
   const [values, setValues] = useState({
     isLoading: false,
-    errors: []
+    errors: [],
+    vaccines: [],
+    dewormers: [],
   });
+
+  /**
+   * Hook para componentDidUpdate
+   */
+  useEffect(  () => {
+    setValues({ ...values, isLoading: true });
+    try {
+      async function fetchMedicines() {
+      const vaccines = await ApiVet.vaccines.fetch();
+      const dewormers = await ApiVet.dewormers.fetch();
+  
+      if(vaccines.data.success && dewormers.data.success){
+        setValues({ ...values, vaccines: vaccines.data.vaccines , dewormers: dewormers.data.dewormers, isLoading: false });
+      }else{
+        enqueueSnackbar("Algo salio mal, vuelva a intentar", { variant: "error" });
+        setValues({ ...values, isLoading: false });
+      }
+    }
+     fetchMedicines();
+    } catch (err) {
+      if (err.response && err.response.data) {
+        const { errors } = err.response.data;
+        setValues({ ...values, errors });
+      }
+    }
+  }, []);
   /**
    * Hook para context
    */
@@ -36,7 +64,7 @@ const AddConsultation = props => {
     console.log(props);
 
     try {
-      setValues({ isLoading: true });
+      setValues({ ...values, isLoading: true });
       const { data } = await ApiVet.consultations.create(
         props.match.params.idHistory,
         request
@@ -58,6 +86,7 @@ const AddConsultation = props => {
       }
     }
   };
+
 
   return (
     <>
@@ -85,6 +114,8 @@ const AddConsultation = props => {
                   title="Registrar Consulta"
                   user={user}
                   onSubmit={handleOnSubmit}
+                  vaccinesData={values.vaccines}
+                  dewormersData={values.dewormers}
                   errors={values.errors}
                 />
               )}

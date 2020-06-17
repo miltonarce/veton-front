@@ -35,4 +35,10 @@ export default {
   veterinaries: {
     fetch: () => axiosInstance.get("/veterinaries"),
   },
+  vaccines:{
+    fetch: () => axiosInstance.get("/vaccines"),
+  },
+  dewormers:{
+    fetch: () => axiosInstance.get("/dewormers"),
+  }
 };
