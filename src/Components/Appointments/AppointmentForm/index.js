@@ -25,6 +25,7 @@ import AppointmentHourPicker from "../AppointmentHourPicker";
 import { InvalidField } from "../../Notifications";
 import { Api, ApiVet } from "../../../Services";
 import styles from "./styles";
+import {URL_IMAGES} from "../../../Utils/globals";
 
 class AppointmentForm extends React.Component {
   state = {
@@ -211,7 +212,7 @@ class AppointmentForm extends React.Component {
                         alt={option.business_name}
                         src={
                           option.image
-                            ? `http://api.veton/imgs/${option.image}`
+                            ? `${URL_IMAGES}${option.image}`
                             : "https://via.placeholder.com/300x200"
                         }
                       />

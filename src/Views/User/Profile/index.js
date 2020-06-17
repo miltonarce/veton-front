@@ -9,6 +9,7 @@ import {
 import TitlePages from "../../../Components/Shared/TitlePages";
 import { AppContext } from "../../../Store";
 import useStyles from "./styles";
+import {URL_IMAGES} from "../../../Utils/globals";
 
 const Profile = () => {
   const classes = useStyles();
@@ -56,7 +57,7 @@ const Profile = () => {
                         className={classes.ImageUser}
                         src={
                           user.image
-                            ? `http://api.veton/imgs/${user.image}`
+                            ? `${URL_IMAGES}${user.image}`
                             : "/assets/no-image.png"
                         }
                       />

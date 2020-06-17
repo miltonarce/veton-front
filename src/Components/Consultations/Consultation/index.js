@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Grid, Button } from "@material-ui/core";
-import { Check } from "@material-ui/icons";
+import { Check, Close } from "@material-ui/icons";
 import ModalConsultation from "../ModalConsultation";
 import useStyles from "./styles";
 
@@ -40,6 +40,10 @@ const Consultation = ({ dataConsultation, user }) => {
     setValues({ ...values, openModal: !values.openModal });
   };
 
+  
+  console.log("CONSULTAS", dataConsultation);
+
+
   return (
     <>
       <Grid container alignItems="center" justify="space-between">
@@ -58,10 +62,10 @@ const Consultation = ({ dataConsultation, user }) => {
                 </span>
               </Grid>
               <Grid item className={classes.centerElements} xs={4}>
-                <Check />
+               {dataConsultation.id_vaccine ? <Check /> : <Close />} 
               </Grid>
               <Grid item className={classes.centerElements} xs={4}>
-                <Check />
+              {dataConsultation.id_dewormer ? <Check /> : <Close />} 
               </Grid>
             </Grid>
           </div>

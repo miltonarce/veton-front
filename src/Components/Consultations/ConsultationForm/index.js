@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
+import { Paper, Typography, Grid, TextField, Button, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { InvalidField } from "../../Notifications";
 import styles from "./styles";
@@ -11,6 +11,8 @@ class ConsultationForm extends React.Component {
       comments: "",
       id_user: null,
       afflictions_procedures: "",
+      id_vaccine: "ninguna",
+      id_dewormer: "ninguno",
     },
   };
 
@@ -45,11 +47,12 @@ class ConsultationForm extends React.Component {
   };
 
   render() {
-    const { title, classes, errors } = this.props;
+    const { title, classes, errors,  vaccinesData, dewormersData } = this.props;
     const {
-      form: { comments, afflictions_procedures },
+      form: { comments, afflictions_procedures, id_vaccine, id_dewormer },
     } = this.state;
     const { handleOnSubmit, handleOnChange } = this;
+
     return (
       <>
         <Paper className={classes.Paper}>
@@ -88,6 +91,34 @@ class ConsultationForm extends React.Component {
                 onChange={handleOnChange}
               />
               <InvalidField errors={errors} field="afflictions_procedures" />
+            </Grid>
+            <Grid item xs={12} className={classes.GridButton}>
+            <InputLabel id="vaccines">Vacunas</InputLabel>
+                <Select
+                  labelId="vaccines"
+                  id="id_vaccine"
+                  value={id_vaccine}
+                  name="id_vaccine"
+                  className={classes.Select}
+                  onChange={handleOnChange}
+                >
+                  <MenuItem value="ninguna">Ninguna</MenuItem>  
+                    {vaccinesData.map(v =>  <MenuItem key={v.id_vaccine} value={v.id_vaccine}>{v.name}</MenuItem>)}
+                </Select>
+            </Grid>
+            <Grid item xs={12} className={classes.GridButton}>
+            <InputLabel id="dewormers">Desparasitantes</InputLabel>
+                <Select
+                  labelId="dewormers"
+                  id="id_dewormer"
+                  value={id_dewormer}
+                  name="id_dewormer"
+                  className={classes.Select}
+                  onChange={handleOnChange}
+                >
+                  <MenuItem value="ninguno">Ninguno</MenuItem>  
+                    {dewormersData.map(d =>  <MenuItem key={d.id_dewormer} value={d.id_dewormer}>{d.name}</MenuItem>)}
+                </Select>
             </Grid>
             <Grid item className={classes.GridButton} xs={12}>
               <Grid

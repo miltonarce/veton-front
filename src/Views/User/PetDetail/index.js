@@ -13,7 +13,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { Api } from "../../../Services";
-import { calculateAge } from "../../../Utils/globals";
+import { calculateAge, URL_IMAGES } from "../../../Utils/globals";
 import { ListHistories } from "../../../Components/Histories";
 import { AppContext } from "../../../Store";
 import TitlePages from "../../../Components/Shared/TitlePages";
@@ -113,7 +113,7 @@ class PetDetail extends React.Component {
                           className={classes.ImagePet}
                           src={
                             dataPet.image
-                              ? `http://api.veton/imgs/${dataPet.image}`
+                              ? `${URL_IMAGES}${dataPet.image}`
                               : "https://via.placeholder.com/300x200"
                           }
                         />
