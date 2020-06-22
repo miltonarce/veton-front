@@ -21,6 +21,14 @@ export default {
             transition: ".5s",
         },
     },
+    ContentWelcome:{
+        color: "#999999",
+        display: "flex",
+    },
+    ContentUserData:{
+        color: "#333333",
+        marginLeft: ".5rem"
+    },
     ContentIcon: { marginRight: ".5rem", cursor: "pointer" },
     ContainerFlex: {
         display: "flex",

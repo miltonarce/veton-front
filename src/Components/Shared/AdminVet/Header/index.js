@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { AppContext } from "../../../../Store";
 import {
   AppBar,
   Toolbar,
@@ -7,6 +8,7 @@ import {
   Container,
   Menu,
   MenuItem,
+  Avatar,
 } from "@material-ui/core";
 import {
   Pets,
@@ -16,11 +18,15 @@ import {
 } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
+import {URL_IMAGES} from "../../../../Utils/globals";
 
 const Header = ({ classes }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = event => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const dataUser = React.useContext(AppContext);
+  const {user} = dataUser.auth;
+  const userImage = user.image;
 
   return (
     <AppBar position="static">
@@ -42,12 +48,21 @@ const Header = ({ classes }) => {
             </Link>
             <div className={classes.ContentLink}>
               <div>
-                <AccountCircle
+                {userImage
+                  ? <Avatar 
+                  alt={user.name + user.last_name} 
+                  src={URL_IMAGES + user.image}
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  />
+                  : <AccountCircle
                   aria-controls="simple-menu"
                   aria-haspopup="true"
                   className={classes.ContentIcon}
                   onClick={handleClick}
-                />
+                  />
+                }
               </div>
               <Menu
                 keepMounted
@@ -66,6 +81,10 @@ const Header = ({ classes }) => {
                   }}>Salir</MenuItem>
                 </Link>
               </Menu>
+            </div>
+            <div className={classes.ContentWelcome}>
+              <p>Bienvenido/a:</p>
+              <p className={classes.ContentUserData}>{user.email}</p>
             </div>
           </Container>
         </Toolbar>
