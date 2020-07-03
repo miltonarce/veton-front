@@ -1,31 +1,25 @@
 import React from "react";
-import {
-  CircularProgress,
-  CssBaseline,
-  Container,
-  Grid,
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import  ListVets   from "../../../Components/Veterinaries/ListVets";
-import { ApiAdminVet } from "../../../Services";
-import { AppContext } from "../../../Store";
-import { Spinner } from "../../../Components/Notifications";
-import styles from "./styles";
-import  {ContainerMain } from "./styles";
+import {CssBaseline, Container, Grid, Button} from "@material-ui/core";
+import {withStyles} from "@material-ui/core/styles";
+import {Add} from "@material-ui/icons";
+import ListVets from "../../../Components/Veterinaries/ListVets";
+import {ApiAdminVet} from "../../../Services";
+import {AppContext} from "../../../Store";
+import {Spinner} from "../../../Components/Notifications";
+import styles, {ContainerMain, VetLink} from "./styles";
 
 class HomeAdmin extends React.Component {
   state = {
-    vetsList: []
+    vetsList: [],
   };
 
-  async componentDidMount () {
+  async componentDidMount() {
     const {
       auth: {user},
     } = this.context;
 
     try {
       const data = await ApiAdminVet.veterinaries.fetch(user.id_user);
-      console.log(data)
       if (data.status === 200) {
         this.setState({...this.state, vetsList: data.data.veterinary});
       }else {
@@ -62,28 +56,53 @@ class HomeAdmin extends React.Component {
  
   render() {
     const {vetsList} = this.state;
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <>
         <CssBaseline />
         <Container fixed component="section">
-          <Grid container direction="row" justify="center" spacing={2}>
-            <Grid item md={8} xl={9} xs={12} component="section">
-            <div>
-            <h2 className={classes.title}>
-              Listados de Veterinarias
-            </h2>
-            </div>
-            <div>{vetsList.length > 0 ? (
-            <ContainerMain>
-              <ListVets vets={vetsList} />
-            </ContainerMain>
-          ) : (
-            <ContainerMain>
-              <Spinner />
-            </ContainerMain>
+          <Grid
+            container
+            alignItems="center"
+            direction="row"
+            justify="space-between"
+            spacing={2}
+          >
+            <Grid item component="section" md={9} xl={9} xs={12}>
+              <div>
+                <h2 className={classes.title}>Listado de tus Veterinarias</h2>
+              </div>
+            </Grid>
+            <Grid item md={3} xs={12}>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                justify="center"
+              >
+                <VetLink to="/user/add-pet">
+                  <Button
+                    color="secondary"
+                    endIcon={<Add />}
+                    variant="contained"
+                  >
+                    Agregar Veterinaria
+                  </Button>
+                </VetLink>
+              </Grid>
+            </Grid>
+            <Grid item component="section" md={12} xl={9} xs={12}>
+              <div>
+                {vetsList.length > 0 ? (
+                  <ContainerMain>
+                    <ListVets vets={vetsList} />
+                  </ContainerMain>
+                ) : (
+                  <ContainerMain>
+                    <Spinner />
+                  </ContainerMain>
           )}
-            </div>
+              </div>
             </Grid>
           </Grid>
         </Container>

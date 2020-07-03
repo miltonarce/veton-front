@@ -6,37 +6,37 @@ import {
 } from "@material-ui/core";
 import { AppContext } from "../../../Store";
 import {
-  CardVet,
-  CardVetMedia,
+  CardDoc,
+  CardDocMedia,
   ContentMedia,
-  CardPetHeader,
+  CardDocHeader,
   PinkTypo,
   TextTypo,
   CardPaper,
-  VetLink,
-  ButtonDetailsVet
+  DocLink,
+  ButtonDetailsDoc
 } from "./styles";
 
-const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1, street, approved }) => {
+const CardDocVet = ({ name, last_name, image, email, dni, phone }) => {
   const {
     auth: { user },
   } = useContext(AppContext);
 
   return (
-    <CardVet>
+    <CardDoc>
       <ContentMedia>
-        <CardVetMedia
-          alt={business_name}
+        <CardDocMedia
+          alt={last_name}
           component="img"
           src={
             image ? `http://localhost/veton/veton-back/public/imgs/${image}` : "/assets/no-image.png"
           }
-          title={`Veterinaria ${business_name}`}
+          title={`Doctor ${last_name}`}
         />
       </ContentMedia>
-      <CardPetHeader
-        subheader={street || "Sin dirección."}
-        title={`${business_name} ${last_name ? last_name : ''}`}
+      <CardDocHeader
+        subheader={email || "Sin dirección."}
+        title={`${name} ${last_name ? last_name : ''}`}
       />
       <CardContent>
         <Grid
@@ -55,10 +55,10 @@ const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1
                 justify="center"
               >
                 <Grid item xs={12}>
-                  <PinkTypo color="secondary">CUIT</PinkTypo>
+                  <PinkTypo color="secondary">DNI</PinkTypo>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextTypo>{cuit_cuil || "Sin registro."}</TextTypo>
+                  <TextTypo>{dni || "Sin registro."}</TextTypo>
                 </Grid>
               </Grid>
             </CardPaper>
@@ -75,7 +75,7 @@ const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1
                   <PinkTypo color="secondary">Teléfono</PinkTypo>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextTypo>{phone1 || "Sin registro."}</TextTypo>
+                  <TextTypo>{phone || "Sin registro."}</TextTypo>
                 </Grid>
               </Grid>
             </CardPaper>
@@ -87,34 +87,25 @@ const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1
           <Grid item xs={3}>
           </Grid>
           <Grid item xs={9}>
-            {approved
-              ? <ButtonDetailsVet variant="contained" disabled>
-                  EN APROBACION
-                </ButtonDetailsVet>
-              : 
-                <VetLink
-                  to={`admin-vet/veterinary/${id_veterinary}`}
+            <DocLink
+              to={`admin-vet/veterinary/${name}`}
                 >
-                  <ButtonDetailsVet color="primary" variant="contained">
-                    VER DETALLES
-                  </ButtonDetailsVet>
-                </VetLink>
-            }
+              <ButtonDetailsDoc color="primary" variant="contained">
+                DESACTIVAR
+              </ButtonDetailsDoc>
+            </DocLink>
           </Grid>
         </Grid>
       </CardContent>
-    </CardVet>
+    </CardDoc>
   );
 };
 
-Vet.propTypes = {
-  id_veterinary: PropTypes.number.isRequired,
-  business_name: PropTypes.string.isRequired,
-  //last_name: PropTypes.string,
+CardDocVet.propTypes = {
+  name: PropTypes.string,
+  last_name: PropTypes.string,
   image: PropTypes.string,
-  cuit_cuil: PropTypes.number.isRequired,
-  phone1: PropTypes.number.isRequired,
-  street: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
-export default Vet;
+export default CardDocVet;
