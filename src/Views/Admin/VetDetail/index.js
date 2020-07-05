@@ -52,6 +52,7 @@ class VetDetail extends React.Component {
   render() {
     const {classes} = this.props;
     const {dataVet, docsList, isLoading, error} = this.state;
+    const id_vet = dataVet.id_veterinary;
     const {
       auth: {user},
     } = this.context;
@@ -290,7 +291,12 @@ class VetDetail extends React.Component {
                   direction="row"
                   justify="center"
                 >
-                  <DocLink to="/user/add-pet">
+                  <DocLink
+                    to={{
+                      pathname: `/admin-vet/add-doc`,
+                      state: id_vet,
+                    }}
+                  >
                     <Button
                       color="secondary"
                       endIcon={<Add />}
@@ -328,7 +334,12 @@ class VetDetail extends React.Component {
                   direction="row"
                   justify="center"
                 >
-                  <DocLink to="/user/add-pet">
+                  <DocLink
+                    to={{
+                      pathname: `/admin-vet/add-doc`,
+                      state: id_vet,
+                    }}
+                  >
                     <Button
                       color="secondary"
                       endIcon={<Add />}

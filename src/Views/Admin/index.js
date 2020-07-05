@@ -6,6 +6,7 @@ import { styled } from "@material-ui/core/styles";
 // Veterinary all Views
 import HomeAdmin from "./HomeAdmin";
 import VetDetail from "./VetDetail";
+import AddDoc from "./AddDoc";
 import Header from "../../Components/Shared/AdminVet/Header";
 import Footer from "../../Components/Shared/Footer";
 
@@ -55,6 +56,7 @@ class Admin extends React.Component {
             render={() => <HomeAdmin userSelected={userSelected} />}
           />
           <Route component={VetDetail} path={`${match.path}/veterinary/:id`} />
+          <Route component={AddDoc} path={`${match.path}/add-doc`} />
           </ContainerMain>
         <Footer />
       </ContentMain>

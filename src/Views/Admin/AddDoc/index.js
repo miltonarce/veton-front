@@ -1,10 +1,12 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
-import {Container, CssBaseline, Grid} from "@material-ui/core";
+import {Container, CssBaseline, Grid, Paper, Typography} from "@material-ui/core";
 import {AddPetForm} from "../../../Components/Pets";
+import AddDocForm from "../../../Components/Users/AddDocForm";
 import {Api} from "../../../Services";
 import TitlePages from "../../../Components/Shared/TitlePages";
 import {ModalMsg, Spinner} from "../../../Components/Notifications";
+
 
 class AddDoc extends React.Component {
   state = {
@@ -113,22 +115,25 @@ class AddDoc extends React.Component {
         <CssBaseline />
         <Container fixed>
           <TitlePages
-            subtitle=" Aquí podrás agrgar una nueva mascota, recordá completar los datos solicitados."
-            title="Agregar nueva mascota"
+            subtitle=" Recordá completar los datos solicitados."
+            title="... O podés agregar uno nuevo!"
           />
           <Grid container alignItems="center" direction="row" justify="center">
+          <Grid item xs={12} component="section" justify="center" alignItems="center">
+            </Grid>
             <Grid item lg={7} xs={12}>
-              <AddPetForm
+           {/*  <AddPetForm
                 breeds={breeds}
                 errors={errors}
                 title="Ingrese los datos de la mascota Mascota"
                 types={types}
                 onSubmit={handleOnSubmit}
-              />
+              />*/}
+           <AddDocForm />
             </Grid>
-          </Grid>
+          </Grid>{/*
           {isLoading ? <Spinner /> : ""}
-          {openMsg ? <ModalMsg msg={hasMsg} success={success} /> : ""}
+          {openMsg ? <ModalMsg msg={hasMsg} success={success} /> : ""}*/}
         </Container>
       </>
     );
