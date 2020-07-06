@@ -12,4 +12,11 @@ export default {
         width: "100%",
         marginTop: "2rem",
     },
+    Label:{
+        marginBottom: "1rem",
+        marginTop: "1rem",
+        color: "#5c2299",
+        display: "block",
+    fontWeight: 500
+    }
 };

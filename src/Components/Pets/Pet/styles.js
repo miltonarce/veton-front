@@ -34,6 +34,9 @@ const ContentMedia = styled("figure")({
     width: "100%",
     height: 195,
     margin: 0,
+    "& img": {
+        objectFit: "cover",
+    }
 });
 
 const CardPetHeader = styled(CardHeader)({

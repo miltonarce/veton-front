@@ -48,7 +48,11 @@ class AppointmentForm extends React.Component {
   async componentDidMount() {
     try {
       const { data } = await ApiVet.veterinaries.fetch();
-      this.setState({ ...this.state, veterinaries: data });
+      console.log(data);
+      if(data.success){
+        this.setState({ ...this.state, veterinaries: data.veterinaries });
+      }
+      
     } catch (err) {
       console.error("err al obtener todas las veterinarias");
     }
