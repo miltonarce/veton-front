@@ -1,10 +1,10 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import {Container, CssBaseline, Grid} from "@material-ui/core";
-import AddDocForm from "../../../Components/Users/AddDocForm";
+import AddVetForm from "../../../Components/Veterinaries/AddVetForm";
 import TitlePages from "../../../Components/Shared/TitlePages";
 
-class AddDoc extends React.Component {
+class AddVet extends React.Component {
   render() {
     return (
       <>
@@ -12,11 +12,11 @@ class AddDoc extends React.Component {
         <Container fixed>
           <TitlePages
             subtitle=" Recordá completar los datos solicitados."
-            title="... O podés agregar uno nuevo!"
+            title="Registrá una nueva veterinaria"
           />
           <Grid container alignItems="center" direction="row" justify="center">
             <Grid item lg={7} xs={12}>
-              <AddDocForm />
+              <AddVetForm />
             </Grid>
           </Grid>
         </Container>
@@ -26,4 +26,4 @@ class AddDoc extends React.Component {
 }
 
 // Add router to handle history push go to other page...
-export default withRouter(props => <AddDoc {...props} />);
+export default withRouter(props => <AddVet {...props} />);

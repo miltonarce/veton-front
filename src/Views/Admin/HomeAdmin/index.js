@@ -23,40 +23,19 @@ class HomeAdmin extends React.Component {
       if (data.status === 200) {
         this.setState({...this.state, vetsList: data.data.veterinary});
       }else {
-       console.log("Algo salio mal, vuelva a intentar", { variant: "error" });
+        console.log("Algo salio mal, vuelva a intentar", {variant: "error"});
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  /*constructor(props) {
-    super(props);
-    this.state = {
-      vetsList: [],
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      this.setState({ ...this.state });
-      const {
-        auth: { user },
-      } = this.context;
-      const data = await ApiAdminVet.veterinaries.fetch(user.id_user);
-      if (data.success) {
-        this.setState({...this.state, vetsList: data.data.veterinary});
-      } else {
-        this.setState({ ...this.state, vetsList: [] });
-      }
-    } catch (err) {
-      this.setState({ ...this.state, vetsList: [] });
-    }
-  }*/
- 
   render() {
     const {vetsList} = this.state;
     const {classes} = this.props;
+    const {
+      auth: {user},
+    } = this.context;
     return (
       <>
         <CssBaseline />
@@ -80,7 +59,12 @@ class HomeAdmin extends React.Component {
                 direction="row"
                 justify="center"
               >
-                <VetLink to="/user/add-pet">
+                <VetLink
+                  to={{
+                    pathname: `/admin-vet/add-vet`,
+                    state: user.id_user,
+                  }}
+                >
                   <Button
                     color="secondary"
                     endIcon={<Add />}
@@ -101,7 +85,7 @@ class HomeAdmin extends React.Component {
                   <ContainerMain>
                     <Spinner />
                   </ContainerMain>
-          )}
+                )}
               </div>
             </Grid>
           </Grid>

@@ -1,37 +1,25 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
-import {
-  InputAdornment,
-  Grid,
-  IconButton,
-  Button,
-  Avatar,
-  Paper,
-  Typography,
-} from "@material-ui/core";
-import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {Grid, Button, Avatar, Paper, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {ApiVet} from "../../../Services";
 import {ModalMsg, Spinner} from "../../Notifications";
 import styles from "./styles";
 
-class AddDocForm extends Component {
+class AddVetForm extends Component {
   state = {
     formData: {
-      email: "",
-      password: "",
-      dni: "",
-      phone: "",
-      name: "",
-      last_name: "",
-      id_role: 3,
-      id_vet: this.props.location.state,
+      business_name: "",
+      fantasy_name: "",
+      cuit_cuil: "",
+      phone1: "",
+      street: "",
+      id_user: this.props.location.state,
       image: "",
     },
     previewImage: null,
     imageSrc: null,
-    showPassword: false,
     isLoading: false,
     hasMsg: null,
     openMsg: false,
@@ -57,14 +45,13 @@ class AddDocForm extends Component {
   handleSubmit = async () => {
     const {state} = this;
     const {history} = this.props;
-
     try {
       this.setState({...state, isLoading: true});
       const request = { ...state.formData };
       if (state.imageSrc) {
         request.image = state.imageSrc;
       }
-      const {data} = await ApiVet.veterinaries.createDoc(request);
+      const {data} = await ApiVet.veterinaries.createVet(request);
       if (data.success) {
         this.setState({
           ...state,
@@ -73,9 +60,8 @@ class AddDocForm extends Component {
           hasMsg: data.msg,
           success: data.success,
         });
-        const idVetToNavigate = this.props.location.state;
         setTimeout(() => {
-          history.push(`/admin-vet/veterinary/${idVetToNavigate}`);
+          history.push(`/admin-vet`);
         }, 3000);
       } else {
         this.setState({
@@ -97,7 +83,7 @@ class AddDocForm extends Component {
         ...state,
         isLoading: false,
         hasMsg:
-          "Se produjo un error al registar el médico, por favor verifique sus datos.",
+          "Se produjo un error al registar la veterinaria, por favor verifique sus datos.",
         openMsg: true,
       });
       setTimeout(() => {
@@ -130,42 +116,17 @@ class AddDocForm extends Component {
     }
   };
 
-  /**
-   * Handle click show password form
-   * @returns {void}
-   */
-  handleClickShowPassword = () => {
-    const {state} = this;
-    this.setState({...state, showPassword: !state.showPassword});
-  };
-
-  /**
-   * Prevent mouse down
-   * @param {Event} event
-   * @returns {void}
-   */
-  handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
-
   render() {
     const {classes} = this.props;
     const {
       formData,
-      showPassword,
       openMsg,
       hasMsg,
       isLoading,
       success,
       previewImage,
     } = this.state;
-    const {
-      handleSubmit,
-      handleOnChange,
-      handleClickShowPassword,
-      handleMouseDownPassword,
-      handleInputFile,
-    } = this;
+    const {handleSubmit, handleOnChange, handleInputFile} = this;
     return (
       <ValidatorForm ref="form" onSubmit={handleSubmit}>
         <Paper className={classes.Paper}>
@@ -174,31 +135,21 @@ class AddDocForm extends Component {
             color="secondary"
             component="h3"
           >
-            Ingresá los datos del Médico Veterinario
+            Ingresá los datos de la Veterinaria
           </Typography>
           <Grid item xs={12}>
             <TextValidator
               fullWidth
-              errorMessages={["Este campo es requerido."]}
-              id="name"
-              label="Ingrese nombre"
+              errorMessages={[
+                "Este campo es requerido.",
+                "El nombre debe tener al menos 2 caracteres",
+              ]}
+              id="business_name"
+              label="Ingrese nombre de la empresa"
               margin="normal"
-              name="name"
-              validators={["required"]}
-              value={formData.name}
-              onChange={handleOnChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextValidator
-              fullWidth
-              errorMessages={["Este campo es requerido."]}
-              id="last_name"
-              label="Ingrese apellido"
-              margin="normal"
-              name="last_name"
-              validators={["required"]}
-              value={formData.last_name}
+              name="business_name"
+              validators={["required", "minStringLength:2"]}
+              value={formData.business_name}
               onChange={handleOnChange}
             />
           </Grid>
@@ -207,22 +158,38 @@ class AddDocForm extends Component {
               fullWidth
               errorMessages={[
                 "Este campo es requerido.",
-                "El dni debe ser un número.",
-                "Debe tener un minimo de 4 numeros",
-                "Debe tener un máximo de 12 números.",
+                "El nombre de fantasia debe tener al menos 2 caracteres",
               ]}
-              id="dni"
-              label="DNI (Solo números)"
+              id="fantasy_name"
+              label="Ingrese nombre de fantasía"
               margin="normal"
-              name="dni"
+              name="fantasy_name"
+              validators={["required", "minStringLength:2"]}
+              value={formData.fantasy_name}
+              onChange={handleOnChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextValidator
+              fullWidth
+              errorMessages={[
+                "Este campo es requerido.",
+                "El cuit debe ser un número",
+                "Debe tener un minimo de 4 numeros",
+                "Debe tener un máximo de 20 números.",
+              ]}
+              id="cuit_cuil"
+              label="CUIT/CUIL (Solo números)"
+              margin="normal"
+              name="cuit_cuil"
               type="number"
               validators={[
                 "required",
                 "isNumber",
                 "minStringLength:4",
-                "maxStringLength:12",
+                "maxStringLength:20",
               ]}
-              value={formData.dni}
+              value={formData.cuit_cuil}
               onChange={handleOnChange}
             />
           </Grid>
@@ -231,74 +198,28 @@ class AddDocForm extends Component {
               fullWidth
               errorMessages={[
                 "Este campo es requerido.",
-                "El dni debe ser un número.",
-                "Debe tener un minimo de 8 numeros",
+                "El teléfono debe ser un numero",
               ]}
-              id="phone"
+              id="phone1"
               label="Teléfono (Solo números)"
               margin="normal"
-              name="phone"
+              name="phone1"
               type="number"
-              validators={["required", "isNumber", "minStringLength:8"]}
-              value={formData.phone}
+              validators={["required", "isNumber"]}
+              value={formData.phone1}
               onChange={handleOnChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextValidator
               fullWidth
-              errorMessages={[
-                "Este campo es requerido.",
-                "No es un email valido.",
-              ]}
-              id="email"
-              label="Ingrese email"
+              errorMessages={["Este campo es requerido."]}
+              id="street"
+              label="Domicilio"
               margin="normal"
-              name="email"
-              validators={["required", "isEmail"]}
-              value={formData.email}
-              onChange={handleOnChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextValidator
-              fullWidth
-              errorMessages={[
-                "La contraseña es requerida",
-                "La contraseña debe tener un mínimo de 4 caracteres",
-                "La contraseñá puede tener un máximo de 100 caracteres",
-                "Solo se aceptan letras y numeros para la contraseñá, sin espacios.",
-              ]}
-              id="password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment className={classes.Adorment} position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      edge="end"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? (
-                        <VisibilityOff color="secondary" />
-                      ) : (
-                        <Visibility color="secondary" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              label="Ingrese contraseña"
-              margin="normal"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              validators={[
-                "required",
-                "minStringLength:4",
-                "maxStringLength:100",
-                "matchRegexp:^[A-Za-z0-9]+$",
-              ]}
-              value={formData.password}
+              name="street"
+              validators={["required"]}
+              value={formData.street}
               onChange={handleOnChange}
             />
           </Grid>
@@ -358,5 +279,5 @@ class AddDocForm extends Component {
 }; */
 
 export default withStyles(styles)(
-  withRouter(props => <AddDocForm {...props} />)
+  withRouter(props => <AddVetForm {...props} />)
 );
