@@ -9,6 +9,13 @@ const useStyles = makeStyles(() => ({
     icons: {
         color: "#fff",
     },
+    icons2: {
+        color: "#fff",
+        fontSize: "14px",
+        fontWeight: 600,
+        borderRadius: "8px",
+        padding: ".1rem 1rem",
+    },
     listHours: {
         padding: "10px",
         borderRadius: "0 0 18px 18px",
@@ -33,6 +40,11 @@ const useStyles = makeStyles(() => ({
     date: {
         fontSize: "14px",
     },
+    datePicker: {
+        position: "absolute",
+        marginTop: "3.6rem",
+        marginLeft: "2rem"
+    }
 }));
 
 export default useStyles;
