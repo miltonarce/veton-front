@@ -9,7 +9,7 @@ import {
     Button,
 } from "@material-ui/core";
 
-const CardVet = styled(Card)({
+const CardDoc = styled(Card)({
     maxWidth: 306,
     minWidth: 306,
     maxHeight: 436,
@@ -19,7 +19,7 @@ const CardVet = styled(Card)({
     boxShadow: "00px 3px 50px -27px rgba(0,0,0,0.75)",
 });
 
-const CardVetMedia = styled(CardMedia)({
+const CardDocMedia = styled(CardMedia)({
     height: 210,
     width: 210,
     borderRadius: "150px",
@@ -36,7 +36,7 @@ const ContentMedia = styled("figure")({
     margin: 0,
 });
 
-const CardPetHeader = styled(CardHeader)({
+const CardDocHeader = styled(CardHeader)({
     paddingBottom: "0px",
     "& div": {
         overflow: "hidden",
@@ -68,23 +68,23 @@ const CardPaper = styled(Paper)({
     padding: ".3rem",
 });
 
-const VetLink = styled(Link)({
+const DocLink = styled(Link)({
     textDecoration: "none",
     margin: "1rem",
 });
 
-const ButtonDetailsVet = styled(Button)({
+const ButtonDetailsDoc = styled(Button)({
     marginBottom: "1rem",
 });
 
 export {
-    CardVet,
-    CardVetMedia,
+    CardDoc,
+    CardDocMedia,
     ContentMedia,
-    CardPetHeader,
+    CardDocHeader,
     PinkTypo,
     TextTypo,
     CardPaper,
-    VetLink,
-    ButtonDetailsVet
+    DocLink,
+    ButtonDetailsDoc
 };

@@ -6,7 +6,7 @@ import {Api} from "../../../Services";
 import TitlePages from "../../../Components/Shared/TitlePages";
 import {ModalMsg, Spinner} from "../../../Components/Notifications";
 
-class AddPet extends React.Component {
+class AddDoc extends React.Component {
   state = {
     hasMsg: null,
     openMsg: false,
@@ -136,4 +136,4 @@ class AddPet extends React.Component {
 }
 
 // Add router to handle history push go to other page...
-export default withRouter(props => <AddPet {...props} />);
+export default withRouter(props => <AddDoc {...props} />);

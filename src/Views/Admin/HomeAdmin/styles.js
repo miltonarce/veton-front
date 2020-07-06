@@ -18,7 +18,8 @@ export {
 export default {
     title: {
         color: "#5C2299",
-        paddingTop: "1rem",
-        paddingBottom: "1rem",
+        fontSize: "2rem",
+        padding: "12px",
+        margin: "2rem 0",
     }
 }

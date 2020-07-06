@@ -1,10 +1,13 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import { CssBaseline } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles";
+import {Route} from "react-router-dom";
+import {CssBaseline} from "@material-ui/core";
+import {styled} from "@material-ui/core/styles";
 
-// Veterinary all Views
+// Admin Veterinary all Views
 import HomeAdmin from "./HomeAdmin";
+import VetDetail from "./VetDetail";
+import AddDoc from "./AddDoc";
+import AddVet from "./AddVet";
 import Header from "../../Components/Shared/AdminVet/Header";
 import Footer from "../../Components/Shared/Footer";
 
@@ -39,9 +42,9 @@ class Admin extends React.Component {
 
   render() {
     const {
-      props: { match },
+      props: {match},
       handleOnUserSelected,
-      state: { userSelected },
+      state: {userSelected},
     } = this;
     return (
       <ContentMain>
@@ -53,6 +56,9 @@ class Admin extends React.Component {
             path={match.path}
             render={() => <HomeAdmin userSelected={userSelected} />}
           />
+          <Route component={VetDetail} path={`${match.path}/veterinary/:id`} />
+          <Route component={AddDoc} path={`${match.path}/add-doc`} />
+          <Route component={AddVet} path={`${match.path}/add-vet`} />
           </ContainerMain>
         <Footer />
       </ContentMain>

@@ -11,5 +11,11 @@ export default {
   veterinaries: {
     //fetch: idUser => axiosInstance.get("/pets"),
     fetch: idUser => axiosInstance.get(`/veterinaries/${idUser}`),
+  },
+  veterinary: {
+    fetch: idVet => axiosInstance.get(`/veterinary/${idVet}`),
+  },
+  doctorVet: {
+    fetch: idVet => axiosInstance.get(`/users/vet/${idVet}`),
   }
 };
