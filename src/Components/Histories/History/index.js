@@ -1,6 +1,9 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import useStyles from "./styles";
+import {URL_IMAGES} from "../../../Utils/globals";
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const History = ({ dataHistory, user }) => {
   const classes = useStyles();
@@ -13,13 +16,47 @@ const History = ({ dataHistory, user }) => {
     hasDisabled: user.id_role !== 3,
   });
 
+  const [images, setImages] = React.useState([]);
+
   React.useEffect(() => {
     if (user.id_role === 3) {
       setValues({ hasDisabled: false });
     }
-    // eslint-disable-next-line
-  }, []);
 
+    for(const prop in dataHistory){
+      console.log(prop)
+      if('image_1' == prop){
+        setImages(images => [...images, {
+          original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
+          thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
+      }
+      if('image_2' == prop){
+        setImages(images => [...images, {
+          original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
+          thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
+      }
+      if('image_3' == prop){
+        setImages(images => [...images, {
+          original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
+          thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
+      }
+      if('image_4' == prop){
+        setImages(images => [...images, {
+          original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
+          thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
+      }
+      if('image_5' == prop){
+        setImages(images => [...images, {
+          original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
+          thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
+      }
+   
+    }
+    
+  }, [dataHistory]);
+
+
+  console.log(user);
   return (
     <Grid container alignItems="center" direction="row" justify="space-between">
       <Grid item xs={8}>
@@ -106,11 +143,12 @@ const History = ({ dataHistory, user }) => {
         </Grid>
         <Grid item className={classes.rowImg} xs={12}>
           <Grid container alignItems="center" direction="row" justify="center">
-            <img
+            {images.length > 0 ?
+            <ImageGallery items={images} /> :<img
               alt="No hay imágenes cargadas todavía."
               className={classes.hisImg}
               src="/assets/no-image.png"
-            />
+            /> }
           </Grid>
         </Grid>
       </Grid>

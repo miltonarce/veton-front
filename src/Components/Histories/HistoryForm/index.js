@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Paper, Typography, Grid, TextField, Button, FormHelperText } from "@material-ui/core";
+import { Paper, Typography, Grid, TextField, Button, FormHelperText, Avatar } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { InvalidField } from "../../Notifications";
 import styles from "./styles";
+import { TransitEnterexitRounded } from "@material-ui/icons";
 
 class HistoryForm extends React.Component {
   state = {
@@ -12,6 +13,8 @@ class HistoryForm extends React.Component {
       hide_comments: "",
       afflictions_procedures: "",
     },
+    previewImage: [],
+    imageSrc: [],
   };
 
   /**
@@ -22,7 +25,14 @@ class HistoryForm extends React.Component {
   handleOnSubmit = event => {
     const { props, state } = this;
     event.preventDefault();
-    props.onSubmit(state.form);
+    const request = { ...state.form };
+    if (state.imageSrc.length > 0 && state.imageSrc.length <= 5) {
+      state.imageSrc.forEach((element, i) => {
+        request[`image${i+1}`] = element;
+      });
+      
+    }
+   props.onSubmit(request);
   };
 
   /**
@@ -36,10 +46,37 @@ class HistoryForm extends React.Component {
     this.setState({ form: { ...state.form, [name]: value } });
   };
 
+  /**
+   * Handle event input to add preview image in form
+   * @param {Event} event
+   * @returns {void}
+   */
+  handleInputFile = event => {
+    this.setState({ ...this.state, previewImage: [], imageSrc: [] });
+    if (event.target.files.length > 0) {
+        
+        for(let i = 0;  i < event.target.files.length; i++){
+          const imagePath = event.target.files[i];
+          const reader = new FileReader();
+          reader.readAsDataURL(imagePath);
+          reader.onloadend = () =>
+            this.setState({
+              ...this.state,
+              previewImage: this.state.previewImage.concat(reader.result),
+              imageSrc: this.state.imageSrc.concat(imagePath),
+            });
+     
+          }
+       
+    }
+  };
+
   render() {
     const { title, classes, errors } = this.props;
     const { comments, hide_comments, afflictions_procedures } = this.state.form;
-    const { handleOnSubmit, handleOnChange } = this;
+    const { previewImage} = this.state;
+    const { handleOnSubmit, handleOnChange, handleInputFile } = this;
+    console.log(this.state);
     return (
       <>
         <Paper className={classes.Paper}>
@@ -96,6 +133,26 @@ class HistoryForm extends React.Component {
               />
               <InvalidField errors={errors} field="afflictions_procedures" />
             </Grid>
+            <Grid item xs={12}><label className={classes.Label}>Agregar imágenes a la historia clínica</label></Grid>
+            <Grid item xs={12}>
+                  <input
+                    accept=".jpg,.jpeg,.png"
+                    id="imagePet"
+                    name="image"
+                    type="file"
+                    multiple
+                    onChange={handleInputFile}
+                  />
+                  {previewImage.length >= 1 && previewImage.map(i =>  (
+                    <Grid container>
+                      <Avatar
+                        alt="Preview pet"
+                        className={classes.avatar}
+                        src={i}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
             <Grid item className={classes.GridButton} xs={12}>
               <Grid
                 container

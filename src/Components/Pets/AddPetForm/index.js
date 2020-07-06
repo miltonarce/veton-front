@@ -351,6 +351,7 @@ class AddPetForm extends React.Component {
                   />
                 </Grid>
                 <Grid item xs={6}>
+                <label className={classes.Label}>Agregar una imágen</label>
                   <input
                     accept=".jpg,.jpeg,.png"
                     id="imagePet"
