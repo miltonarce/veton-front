@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import MomentUtils from "@date-io/moment";
 import { CircularProgress, Container, Grid } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import NavigateNextOutlined from "@material-ui/icons/NavigateNextOutlined";
 import NavigateBeforeOutlined from "@material-ui/icons/NavigateBeforeOutlined";
+import { MuiPickersUtilsProvider, KeyboardDatePicker  } from "@material-ui/pickers";
 import AppointmentList from "../AppointmentList";
 import { Api } from "../../../Services";
 import "moment/locale/es";
@@ -21,6 +23,7 @@ const AppointmentListWithDate = ({ idVet }) => {
   const [loading, setLoading] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false)
 
   useEffect(() => {
     const date = moment(selectedDate).format("YYYY-MM-DD");
@@ -43,8 +46,20 @@ const AppointmentListWithDate = ({ idVet }) => {
    */
   const handleNextDay = () => {
     const dateNext = moment(selectedDate).add(ONE_DAY, DAYS);
+    console.log(dateNext);
     setSelectedDate(dateNext);
   };
+
+   /**
+   * Method to handle  day, set selected day and the effect call api to get appointments
+   * @returns {void}
+   */
+  const handleDateCalendar = (d) => {
+
+    setShowDatePicker(!showDatePicker);
+     setSelectedDate(d);
+  };
+
 
   /**
    * Method to fetch appointments by date by vet
@@ -74,13 +89,34 @@ const AppointmentListWithDate = ({ idVet }) => {
       <div className={classes.ctnDateSelection}>
         <IconButton aria-label="before" className={classes.icons} onClick={handleBeforeDay}>
           <NavigateBeforeOutlined />
-        </IconButton>
-        <p className={classes.date} style={{ userSelect: "none" }}>
-          {moment(selectedDate).format("LL")}
-        </p>
+        </IconButton> 
+        <IconButton aria-label="select date" className={classes.icons2} onClick={() => setShowDatePicker(!showDatePicker)}><p className={classes.date} style={{ userSelect: "none" }}>
+         { showDatePicker ? "Cerrar calendario" : moment(selectedDate).format("LL")} 
+        </p></IconButton> 
         <IconButton aria-label="after" className={classes.icons} onClick={handleNextDay}>
           <NavigateNextOutlined />
         </IconButton>
+        {showDatePicker && 
+        <div className={classes.datePicker}>
+          <MuiPickersUtilsProvider utils={MomentUtils}  > 
+              <KeyboardDatePicker 
+              autoOk
+             orientation="portrait"
+              variant="static"
+                margin="normal"
+                id="date-picker-dialog"
+                label="Date picker dialog"
+                value={selectedDate}
+                onChange={handleDateCalendar}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+      </MuiPickersUtilsProvider>    
+        </div>
+                      
+        }
+        
       </div>
       <div className={classes.listHours}>
         {!loading && appointments.length > 0 && <AppointmentList appointments={appointments} showDate={false} />}
