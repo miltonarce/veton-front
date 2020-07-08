@@ -68,7 +68,7 @@ const ListHistories = ({ histories }) => {
                 justify="space-between"
               >
                 <h3 className={classes.title}>Historia</h3>
-                {user.id_role === 3 ? (
+                {user.id_role === 3 && user.id_veterinary === history.id_veterinary ? (
                   <div>
                     <Link
                       className={classes.ContentLink}
