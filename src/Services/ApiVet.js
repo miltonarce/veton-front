@@ -52,6 +52,8 @@ export default {
       }
       return axiosInstance.post("/vet", form_data);
     },
+    deactivateDoc: request =>
+      axiosInstance.post(`/deactivateDoc`, request),
   },
   vaccines: {
     fetch: () => axiosInstance.get("/vaccines"),
