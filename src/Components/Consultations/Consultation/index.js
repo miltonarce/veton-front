@@ -70,7 +70,7 @@ const Consultation = ({ dataConsultation, user }) => {
             </Grid>
           </div>
         </Grid>
-        {user.id_role === 3 ? (
+        {user.id_role === 3 && user.id_user == dataConsultation.id_user ? (
           <Grid item xs={2}>
             <Link
               className={classes.ContentLink}
