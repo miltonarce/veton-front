@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const DialogDeactivateDoctorConfirmation = ({ buttonText ,title, text, onClickConfirm }) => {
+const DialogDoctorVetConfirmation = ({ buttonText ,title, text, onClickConfirm }) => {
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -35,4 +35,4 @@ const DialogDeactivateDoctorConfirmation = ({ buttonText ,title, text, onClickCo
     );
 }
 
-export default DialogDeactivateDoctorConfirmation;
+export default DialogDoctorVetConfirmation;

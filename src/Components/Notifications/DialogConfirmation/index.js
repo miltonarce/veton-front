@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const DialogConfirmation = ({ title, text, onClickConfirm }) => {
+const DialogConfirmation = ({ textButton, title, text, onClickConfirm }) => {
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -19,7 +19,7 @@ const DialogConfirmation = ({ title, text, onClickConfirm }) => {
     return (
         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
             <Button color="primary" size="small" variant="contained" onClick={handleClickOpen}>
-                Cancelar Turno
+                {textButton}
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{title}</DialogTitle>

@@ -1,7 +1,7 @@
 import React, {Component}  from "react";
 import PropTypes from "prop-types";
 import {CardContent, Grid} from "@material-ui/core";
-import DialogDeactivateDoctorConfirmation from "../../Notifications/DialogDeactivateDoctorConfirmation";
+import DialogDoctorVetConfirmation from "../../Notifications/DialogDoctorVetConfirmation";
 import {ModalMsg, Spinner} from "../../Notifications";
 import {ApiVet} from "../../../Services";
 import {
@@ -148,7 +148,7 @@ class CardDocVet extends Component {
           </Grid>
         </CardContent>
         <CardContent>
-          <DialogDeactivateDoctorConfirmation
+          <DialogDoctorVetConfirmation
             text="Podés volver a activarlo en otro momento"
             title="¿Estás seguro de desactivar el médico de tu veterinaria?"
             onClickConfirm={() => {
