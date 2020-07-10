@@ -40,6 +40,11 @@ const Consultation = ({ dataConsultation, user }) => {
     setValues({ ...values, openModal: !values.openModal });
   };
 
+  const formatter = new Intl.DateTimeFormat("es-AR", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
   
   console.log("CONSULTAS", dataConsultation);
 
@@ -57,9 +62,8 @@ const Consultation = ({ dataConsultation, user }) => {
             >
               <Grid item className={classes.centerElements} xs={4}>
                 <span>
-                  #{dataConsultation.id_consultation}--
-                  {dataConsultation.created_at}
-                </span>
+                  N° {dataConsultation.id_consultation} -- {formatter.format(new Date(dataConsultation.created_at))}
+                 </span>
               </Grid>
               <Grid item className={classes.centerElements} xs={4}>
                {dataConsultation.id_vaccine ? <Check /> : <Close />} 

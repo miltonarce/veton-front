@@ -55,6 +55,12 @@ const History = ({ dataHistory, user }) => {
     
   }, [dataHistory]);
 
+  const formatter = new Intl.DateTimeFormat("es-AR", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+
 
   console.log(user);
   return (
@@ -72,7 +78,7 @@ const History = ({ dataHistory, user }) => {
                 <Grid item xs={3}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
-                      #ID HISTORIA
+                      HISTORIA N°
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -86,7 +92,7 @@ const History = ({ dataHistory, user }) => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <p>{dataHistory.created_at}</p>
+                    <p>{formatter.format(new Date(dataHistory.created_at))}</p>
                   </Grid>
                 </Grid>
                 <Grid item xs={5}>
@@ -96,7 +102,7 @@ const History = ({ dataHistory, user }) => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <p>{dataHistory.updated_at}</p>
+                    <p>{formatter.format(new Date(dataHistory.updated_at))}</p>
                   </Grid>
                 </Grid>
               </Grid>
