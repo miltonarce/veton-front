@@ -26,6 +26,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../../Store";
 import { InvalidField } from "../../Notifications";
 import styles from "./styles";
+import { CloudUploadOutlined } from '@material-ui/icons';
 
 class AddPetForm extends React.Component {
   state = {
@@ -151,7 +152,7 @@ class AddPetForm extends React.Component {
                 justify="space-around"
                 spacing={3}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     required
@@ -165,7 +166,7 @@ class AddPetForm extends React.Component {
                   />
                   <InvalidField errors={errors} field="name" />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     id="last_name"
@@ -187,7 +188,7 @@ class AddPetForm extends React.Component {
                 justify="space-around"
                 spacing={3}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <KeyboardDatePicker
                       fullWidth
@@ -206,7 +207,7 @@ class AddPetForm extends React.Component {
                     />
                   </MuiPickersUtilsProvider>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     required
@@ -229,7 +230,7 @@ class AddPetForm extends React.Component {
                 justify="space-around"
                 spacing={3}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     id="colors"
@@ -241,7 +242,7 @@ class AddPetForm extends React.Component {
                     onChange={handleOnChange}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <FormControl component="fieldset">
                     <FormLabel component="legend">Género</FormLabel>
                     <RadioGroup
@@ -256,14 +257,14 @@ class AddPetForm extends React.Component {
                         direction="row"
                         justify="center"
                       >
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                           <FormControlLabel
                             control={<Radio />}
                             label="Femenino"
                             value={1}
                           />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                           <FormControlLabel
                             control={<Radio />}
                             label="Masculino"
@@ -284,7 +285,7 @@ class AddPetForm extends React.Component {
                 justify="space-around"
                 spacing={3}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <FormControl fullWidth required>
                     <InputLabel htmlFor="id_type">Tipo</InputLabel>
                     <Select
@@ -305,7 +306,7 @@ class AddPetForm extends React.Component {
                     <InvalidField errors={errors} field="id_type" />
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <FormControl fullWidth required>
                     <InputLabel htmlFor="id_breed">Raza</InputLabel>
                     <Select
@@ -336,7 +337,7 @@ class AddPetForm extends React.Component {
                 justify="space-around"
                 spacing={3}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
                     col="20"
@@ -350,14 +351,18 @@ class AddPetForm extends React.Component {
                     onChange={handleOnChange}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                 <label className={classes.Label}>Agregar una imágen</label>
-                  <input
+                <label for="imagePet" className={classes.LabelUpload}>
+                  <CloudUploadOutlined className={classes.IconUpload} /> Subir archivo
+                </label>
+                            <input
                     accept=".jpg,.jpeg,.png"
                     id="imagePet"
                     name="image"
                     type="file"
                     onChange={handleInputFile}
+                    className={classes.InputFile}
                   />
                   {previewImage && (
                     <Grid container>

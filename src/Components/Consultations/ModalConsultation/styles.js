@@ -10,8 +10,8 @@ const useStyles = makeStyles(() => ({
         backgroundColor: "#fff",
         borderRadius: "23px",
         outline: "none",
-        minWidth: "500px",
         maxWidth: "700px",
+        margin: "1rem"
     },
     root: {
         flexGrow: 1,

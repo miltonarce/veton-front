@@ -41,7 +41,7 @@ const Profile = () => {
               justify="space-between"
               spacing={2}
             >
-              <Grid item className={classes.ContentCardUserProfile} xs={10}>
+              <Grid item className={classes.ContentCardUserProfile} xs={12} md={10}>
                 <Paper className={classes.Paper}>
                   <Grid
                     container
@@ -51,7 +51,7 @@ const Profile = () => {
                     justify="space-between"
                     spacing={4}
                   >
-                    <Grid item className={classes.ContentImage} xs={2}>
+                    <Grid item className={classes.ContentImage} xs={12} md={2}>
                       <img
                         alt={`usuario ${user.name}`}
                         className={classes.ImageUser}
@@ -62,7 +62,7 @@ const Profile = () => {
                         }
                       />
                     </Grid>
-                    <Grid item className={classes.Paper} xs={9}>
+                    <Grid item className={classes.Paper} xs={12} md={9}>
                       <Grid
                         container
                         alignItems="center"
@@ -91,7 +91,7 @@ const Profile = () => {
                               justify="flex-start"
                               spacing={4}
                             >
-                              <Grid item xs={3}>
+                              <Grid item xs={12} md={3}>
                                 <Grid item xs={12}>
                                   <Typography color="secondary" component="p">
                                     DNI
@@ -101,7 +101,7 @@ const Profile = () => {
                                   {user.dni}
                                 </Grid>
                               </Grid>
-                              <Grid item xs={5}>
+                              <Grid item xs={12} md={5}>
                                 <Grid item xs={12}>
                                   <Typography color="secondary" component="p">
                                     EMAIL
@@ -111,7 +111,7 @@ const Profile = () => {
                                   {user.email}
                                 </Grid>
                               </Grid>
-                              <Grid item xs={4}>
+                              <Grid item xs={12} md={4}>
                                 <Grid item xs={12}>
                                   <Typography color="secondary" component="p">
                                     CUMPLEAÑOS

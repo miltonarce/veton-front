@@ -39,10 +39,12 @@ const useStyles = makeStyles(theme => ({
     },
     ContentCardText: {
         "& p": {
-            wordBreak: "break-all",
             marginTop: 0,
         },
     },
+    ContentAflic:{
+        marginRight: "2rem"
+    }
 }));
 
 export default useStyles;

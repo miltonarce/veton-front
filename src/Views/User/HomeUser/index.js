@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { AppointmentDatePickerUser } from "../../../Components/Appointments";
 import { PieConsultation } from "../../../Components/Consultations";
@@ -47,17 +47,20 @@ class HomeUser extends React.Component {
             subtitle="Aquí podrás encontrar información relevante sobre todas tus mascotas"
             title="Inicio"
           />
+          <Paper className={classes.Paper}>
           <Grid
             container
             className={classes.paddingTop}
             direction="row"
-            justify="center"
+            justify="space-around"
+            alignItems="center"
             spacing={2}
           >
-            <Grid item md={3} style={{ padding: "20px" }} xs={12} component="aside">
+              
+            <Grid item md={3} lg={3}  sm={8} xs={12} component="aside">
               <AppointmentDatePickerUser idUser={user.id_user} />
             </Grid>
-            <Grid item md={9} xs={12}>
+            <Grid item md={5}  lg={5} xs={12}>
               {statistics.length > 0 ? (
                 <PieConsultation
                   statistics={statistics}
@@ -69,7 +72,9 @@ class HomeUser extends React.Component {
                   </section>
                 )}
             </Grid>
+            
           </Grid>
+          </Paper>
         </Container>
       </>
     );

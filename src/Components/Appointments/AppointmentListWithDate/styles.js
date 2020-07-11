@@ -43,7 +43,8 @@ const useStyles = makeStyles(() => ({
     datePicker: {
         position: "absolute",
         marginTop: "3.6rem",
-        marginLeft: "2rem"
+        marginLeft: "2rem",
+        zIndex: 99
     }
 }));
 
