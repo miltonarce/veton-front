@@ -62,7 +62,7 @@ const ModalConsultation = props => {
                   direction="row"
                   justify="center"
                 >
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <Grid item xs={12}>
                       <Typography color="secondary" component="p">
                         #ID CONSULTA
@@ -70,7 +70,7 @@ const ModalConsultation = props => {
                     </Grid>
                     <Grid item xs={12}>{data.id_consultation}</Grid>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <Grid item xs={12}>
                       <Typography color="secondary" component="p">
                         FECHA DE CONSULTA
@@ -78,7 +78,7 @@ const ModalConsultation = props => {
                     </Grid>
                     <Grid item xs={12}>{data.created_at}</Grid>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={4}>
                     <Grid item xs={12}>
                       <Typography color="secondary" component="p">
                         ULTIMA ACTUALIZACIÓN

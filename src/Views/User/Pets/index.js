@@ -1,11 +1,11 @@
 import React from "react";
-import { CssBaseline, Container, Button, Grid } from "@material-ui/core";
+import { CssBaseline, Container, Button, Grid, CircularProgress } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { Api } from "../../../Services";
 import { ListPets } from "../../../Components/Pets";
 import { AppContext } from "../../../Store";
 import TitlePages from "../../../Components/Shared/TitlePages";
-import { PetLink, ContainerMain } from "./styles";
+import { PetLink, ContainerMain, ContainerMain2 } from "./styles";
 
 class Pets extends React.Component {
   constructor() {
@@ -13,6 +13,7 @@ class Pets extends React.Component {
     this.state = {
       petsList: [],
       error: null,
+      isLoading: false,
     };
   }
 
@@ -34,7 +35,26 @@ class Pets extends React.Component {
   }
 
   render() {
-    const {petsList} = this.state;
+    const {petsList, isLoading} = this.state;
+    if (isLoading)
+    return (
+      <>
+      <CssBaseline />
+      <Container component="section">
+     
+      <ContainerMain2>
+      <Grid
+             container
+             direction="row"
+             justify="center"
+             alignItems="center"
+            >
+        <CircularProgress color="secondary" />
+        </Grid>
+        </ContainerMain2>
+        </Container>
+      </>
+    );
     return (
       <>
         <CssBaseline />

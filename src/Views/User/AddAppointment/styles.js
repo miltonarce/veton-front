@@ -4,4 +4,7 @@ export default {
         marginBottom: "1rem",
         textAlign: "center",
     },
+    ContentSpinner:{
+        paddingTop: "10rem",
+    }
 };

@@ -6,10 +6,15 @@ const PetLink = styled(Link)({
 });
 
 const ContainerMain = styled("div")({
-    marginTop: "2rem",
+    marginTop: "3rem",
+});
+
+const ContainerMain2 = styled("div")({
+    marginTop: "8rem",
 });
 
 export {
     PetLink,
     ContainerMain,
+    ContainerMain2
 };
