@@ -42,12 +42,19 @@ class PetDetail extends React.Component {
     }
   }
 
+  formatter = new Intl.DateTimeFormat("es-AR", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+
   render() {
     const { classes } = this.props;
     const { dataPet, isLoading, error } = this.state;
     const {
       auth: { user },
     } = this.context;
+
     if (isLoading) {
       return (
         <Container fixed>
@@ -157,7 +164,7 @@ class PetDetail extends React.Component {
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={12}>
-                                    {dataPet.birthday || "Sin registro."}
+                                    {this.formatter.format(new Date(dataPet.birthday)) || "Sin registro." }
                                   </Grid>
                                 </Grid>
                                 <Grid item xs={3}>
