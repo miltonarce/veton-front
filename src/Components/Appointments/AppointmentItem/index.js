@@ -41,6 +41,7 @@ const AppointmentItem = ({ date, time, reason, idAppointment, showDate, showCanc
                     </Typography>
                     {showButtonCancel && (
                         <DialogConfirmation
+                            textButton="Cancelar Turno"
                             text="Puedes volver a reservar el turno desde esta misma página"
                             title="¿Estás seguro de cancelar el turno?"
                             onClickConfirm={() => onClickCancelAppointment(idAppointment)}
