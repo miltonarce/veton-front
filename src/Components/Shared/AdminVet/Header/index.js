@@ -38,11 +38,11 @@ const Header = ({ classes }) => {
                 Vet On
               </Typography>
             </div>
-            <Link className={classes.ContentLink} to="/user">
+            <Link className={classes.ContentLink} to="/admin-vet">
               <HomeOutlined className={classes.Icons} />
               Inicio
             </Link>
-            <Link className={classes.ContentLink} to="/user/appointments">
+            <Link className={classes.ContentLink} to="/admin-vet/vetslist">
               <StoreOutlined className={classes.Icons} />
               Mis Veterinarias
             </Link>

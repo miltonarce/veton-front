@@ -61,7 +61,7 @@ class AddVetForm extends Component {
           success: data.success,
         });
         setTimeout(() => {
-          history.push(`/admin-vet`);
+          history.push(`/admin-vet/vetslist`);
         }, 3000);
       } else {
         this.setState({
