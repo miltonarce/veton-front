@@ -1,92 +1,71 @@
 import React from "react";
-import {CssBaseline, Container, Grid, Button} from "@material-ui/core";
-import {withStyles} from "@material-ui/core/styles";
-import {Add} from "@material-ui/icons";
-import ListVets from "../../../Components/Veterinaries/ListVets";
-import {ApiAdminVet} from "../../../Services";
-import {AppContext} from "../../../Store";
-import {Spinner} from "../../../Components/Notifications";
-import styles, {ContainerMain, VetLink} from "./styles";
+import { Container, Grid } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { AppointmentDatePickerUser } from "../../../Components/Appointments";
+import PercentageConsultation  from "../../../Components/Consultations/PercentageConsultation";
+import TitlePages from "../../../Components/Shared/TitlePages";
+import { AppContext } from "../../../Store";
+import { Api } from "../../../Services";
+import styles from "./styles";
 
 class HomeAdmin extends React.Component {
-  state = {
-    vetsList: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      statistics: [],
+    };
+  }
 
   async componentDidMount() {
-    const {
-      auth: {user},
-    } = this.context;
-
     try {
-      const data = await ApiAdminVet.veterinaries.fetch(user.id_user);
-      if (data.status === 200) {
-        this.setState({...this.state, vetsList: data.data.veterinary});
-      }else {
-        console.log("Algo salio mal, vuelva a intentar", {variant: "error"});
+      this.setState({ ...this.state, isLoading: true });
+      const {
+        auth: { user },
+      } = this.context;
+      const { data } = await Api.statistics.fetch(user.id_user);
+      if (data.success) {
+        this.setState({ ...this.state, statistics: data.data });
+      } else {
+        this.setState({ ...this.state, statistics: [] });
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      this.setState({ ...this.state, statistics: [] });
     }
   }
 
   render() {
-    const {vetsList} = this.state;
-    const {classes} = this.props;
+    const { statistics } = this.state;
+    const { classes } = this.props;
     const {
-      auth: {user},
+      auth: { user },
     } = this.context;
     return (
       <>
-        <CssBaseline />
-        <Container fixed component="section">
+        <Container fixed style={{ padingTop: "20px !important" }} component="section">
+          <TitlePages
+            subtitle="Aquí podrás encontrar información relevante sobre todas tus mascotas"
+            title="Inicio"
+          />
           <Grid
             container
-            alignItems="center"
+            className={classes.paddingTop}
             direction="row"
-            justify="space-between"
+            justify="center"
             spacing={2}
           >
-            <Grid item component="section" md={9} xl={9} xs={12}>
-              <div>
-                <h2 className={classes.title}>Listado de tus Veterinarias</h2>
-              </div>
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Grid
-                container
-                alignItems="center"
-                direction="row"
-                justify="center"
-              >
-                <VetLink
-                  to={{
-                    pathname: `/admin-vet/add-vet`,
-                    state: user.id_user,
-                  }}
-                >
-                  <Button
-                    color="secondary"
-                    endIcon={<Add />}
-                    variant="contained"
-                  >
-                    Agregar Veterinaria
-                  </Button>
-                </VetLink>
-              </Grid>
-            </Grid>
-            <Grid item component="section" md={12} xl={9} xs={12}>
-              <div>
-                {vetsList.length > 0 ? (
-                  <ContainerMain>
-                    <ListVets vets={vetsList} />
-                  </ContainerMain>
-                ) : (
-                  <ContainerMain>
-                    <Spinner />
-                  </ContainerMain>
+            
+            <Grid item md={9} xs={12}>
+              {statistics.length > 0 ? (
+                <PercentageConsultation
+                  statistics={statistics}
+                  title="Cantidad de consultas"
+                />
+              ) : (
+                  <section className={classes.marginNot}>
+                    <p>No hay mascotas registradas para mostrar estadisticas.</p>
+                  </section>
                 )}
-              </div>
             </Grid>
           </Grid>
         </Container>
@@ -99,3 +78,4 @@ class HomeAdmin extends React.Component {
 HomeAdmin.contextType = AppContext;
 
 export default withStyles(styles)(HomeAdmin);
+
