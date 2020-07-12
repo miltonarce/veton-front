@@ -24,8 +24,9 @@ class VetDetail extends React.Component {
     docsList: [],
     isLoading: true,
     error: null,
-    somethingToUpdate: null,
+    doctorDeactivate: null,
   };
+  
 
   // Retrieve detail vet by id
   async componentDidMount() {
@@ -44,6 +45,22 @@ class VetDetail extends React.Component {
     }
   }
 
+  // If change prop doctorDeactivate, fetch again pets by the new user...
+  async componentDidUpdate(prevProps) {
+    const {match} = this.props;
+    if (prevProps.doctorDeactivate !== this.props.doctorDeactivate) {
+      await ApiAdminVet.veterinary.fetch(match.params.id);
+    }
+  }
+
+  /**
+   * Method to handle when user select any user from autocomplete component
+   * @param {object} userSelected
+   * @returns {void}
+   */
+  handleOnDoctorDeactivate = doctorDeactivate =>
+    this.setState({ ...this.state, doctorDeactivate });
+
   formatter = new Intl.DateTimeFormat("es-AR", {
     year: "numeric",
     month: "long",
@@ -55,6 +72,7 @@ class VetDetail extends React.Component {
     const {dataVet, docsList, isLoading, error} = this.state;
     const id_vet = dataVet.id_veterinary;
     const {
+      handleOnDoctorDeactivate,
       auth: {user},
     } = this.context;
     if (isLoading) {
@@ -309,7 +327,7 @@ class VetDetail extends React.Component {
                 </Grid>
               </Grid>
               <ContainerMain>
-                <ListDocsVets doctors={docsList} id_vet={id_vet} />
+                <ListDocsVets doctors={docsList} id_vet={id_vet} onDoctorDeactivate={handleOnDoctorDeactivate} />
               </ContainerMain>
             </Grid>
           ) : (
