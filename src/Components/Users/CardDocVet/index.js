@@ -27,8 +27,8 @@ class CardDocVet extends Component {
 
   handleDeactivateDoctor = async () => {
     const {state} = this;
-    const {id_user} = this.props;
-    const {id_veterinary} = this.props;
+    const {id_user, id_veterinary } = this.props;
+    const {onDoctorDeactivate} = this.props;
     const request = {
       id_user,
       id_veterinary,
@@ -38,6 +38,7 @@ class CardDocVet extends Component {
       this.setState({...state, isLoading: true});
       const {data} = await ApiVet.veterinaries.deactivateDoc(request);
       if (data.success) {
+        // onDoctorDeactivate();
         this.setState({
           ...state,
           isLoading: false,

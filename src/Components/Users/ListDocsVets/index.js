@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import CardDocVet from "../CardDocVet";
 import {GridList, styles} from "./styles";
 
-const ListDocsVets = ({doctors, id_vet}) => {
+const ListDocsVets = ({doctors, id_vet, onDoctorDeactivate}) => {
   return (
     <Grid container alignItems="flex-start" direction="row" justify="flex-start" spacing={2} component="ol" style={styles}>
       {doctors.map((doctor, i) => (
@@ -16,7 +16,7 @@ const ListDocsVets = ({doctors, id_vet}) => {
             direction="row"
             justify="center"
           >
-            <CardDocVet {...doctor} id_veterinary={id_vet} />
+            <CardDocVet {...doctor} id_veterinary={id_vet} onDoctorDeactivate={() => onDoctorDeactivate(doctor)} />
           </Grid>
         </GridList>
       ))}
