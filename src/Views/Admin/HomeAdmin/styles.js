@@ -6,7 +6,7 @@ const VetLink = styled(Link)({
 });
 
 const ContainerMain = styled("div")({
-    marginTop: "2rem",
+    marginTop: "1rem",
 });
 
 export {
