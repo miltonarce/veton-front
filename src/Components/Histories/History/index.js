@@ -55,11 +55,17 @@ const History = ({ dataHistory, user }) => {
     
   }, [dataHistory]);
 
+  const formatter = new Intl.DateTimeFormat("es-AR", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+
 
   console.log(user);
   return (
     <Grid container alignItems="center" direction="row" justify="space-between">
-      <Grid item xs={8}>
+      <Grid item xs={12} lg={8}>
         <Grid item className={classes.Paper} xs={12}>
           <Grid item className={classes.ContentCardText} xs={12}>
             <Grid item xs={12}>
@@ -69,34 +75,34 @@ const History = ({ dataHistory, user }) => {
                 direction="row"
                 justify="flex-start"
               >
-                <Grid item xs={3}>
+                <Grid item xs={12} md={3}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
-                      #ID HISTORIA
+                      HISTORIA N°
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <p>{dataHistory.id_history}</p>
                   </Grid>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
                       INICIO HISTORIA CLÍNICA
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <p>{dataHistory.created_at}</p>
+                    <p>{formatter.format(new Date(dataHistory.created_at))}</p>
                   </Grid>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12} md={5}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
                       ÚLTIMA ACTUALIZACIÓN
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <p>{dataHistory.updated_at}</p>
+                    <p>{formatter.format(new Date(dataHistory.updated_at))}</p>
                   </Grid>
                 </Grid>
               </Grid>
@@ -108,7 +114,7 @@ const History = ({ dataHistory, user }) => {
                 direction="row"
                 justify="flex-start"
               >
-                <Grid item xs={5}>
+                <Grid item xs={12} md={5} className={classes.ContentAflic}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
                       AFLICCIONES
@@ -118,7 +124,7 @@ const History = ({ dataHistory, user }) => {
                     <p>{dataHistory.afflictions_procedures}</p>
                   </Grid>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12} md={5}>
                   <Grid item xs={12}>
                     <Typography color="secondary" component="p">
                       OBSERVACIONES
@@ -133,7 +139,7 @@ const History = ({ dataHistory, user }) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4}>
         <Grid item xs={12}>
           <Grid container alignItems="center" direction="row" justify="center">
             <Typography color="secondary" component="p">
@@ -143,7 +149,7 @@ const History = ({ dataHistory, user }) => {
         </Grid>
         <Grid item className={classes.rowImg} xs={12}>
           <Grid container alignItems="center" direction="row" justify="center">
-            {images.length > 0 ?
+            {/* {images.length > 0*/}{ false ? 
             <ImageGallery items={images} /> :<img
               alt="No hay imágenes cargadas todavía."
               className={classes.hisImg}

@@ -5,7 +5,6 @@ import {
   InputAdornment,
   Grid,
   IconButton,
-  Button,
   Avatar,
   Paper,
   Typography,
@@ -14,6 +13,7 @@ import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {withStyles} from "@material-ui/core/styles";
 import {ApiVet} from "../../../Services";
 import {ModalMsg, Spinner} from "../../Notifications";
+import DialogConfirmation from "../../Notifications/DialogConfirmation";
 import styles from "./styles";
 
 class AddDocForm extends Component {
@@ -336,14 +336,14 @@ class AddDocForm extends Component {
             direction="row"
             justify="flex-end"
           >
-            <Button
-              className={classes.SentButton}
-              color="primary"
-              type="submit"
-              variant="contained"
-            >
-              Agregar
-            </Button>
+            <DialogConfirmation
+              text="Quedará asignado a ella y podrá atender pacientes"
+              textButton="Agregar"
+              title="¿Estás seguro de agregar este médico a tu veterinaria?"
+              onClickConfirm={() => {
+                handleSubmit();
+              }}
+            />
           </Grid>
           {isLoading ? <Spinner /> : ""}
           {openMsg ? <ModalMsg msg={hasMsg} success={success} /> : ""}

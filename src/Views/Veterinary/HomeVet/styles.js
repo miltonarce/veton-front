@@ -4,4 +4,7 @@ export default {
         paddingTop: "1rem",
         paddingBottom: "1rem",
     },
+    spinner:{
+        marginTop: "8rem"
+    }
 };

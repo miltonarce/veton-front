@@ -76,7 +76,7 @@ class Login extends Component {
       <div className={classes.Content}>
         <CssBaseline />
         <Grid container alignItems="center" direction="row" justify="center">
-          <Grid item lg={6} md={10} xs={10}>
+          <Grid item lg={6} md={10} xs={9} className={classes.contentPaper}>
             <Paper className={classes.PaperLogin}>
               <Grid
                 container
@@ -85,14 +85,14 @@ class Login extends Component {
                 justify="space-around"
               >
                 <Grid item component="aside" lg={5} md={8} xs={12}>
-                  <figure>
+                  <figure className={classes.Fimg1}>
                     <img
                       alt="Vet On, veterinaria online"
                       className={classes.Cimg1}
                       src="assets/Logo.svg"
                     />
                   </figure>
-                  <figure>
+                  <figure className={classes.Fimg2}>
                     <img
                       alt="Personas con mascotas y la marca Veton"
                       className={classes.Cimg2}

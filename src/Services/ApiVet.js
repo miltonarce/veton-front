@@ -28,6 +28,7 @@ export default {
   users: {
     fetch: id => axiosInstance.get(`/users/${id}`),
     autocomplete: input => axiosInstance.get(`/users/search/${input}`),
+    autocompleteDoctor: input => axiosInstance.get(`/users/searchdoctor/${input}`),
   },
   userPets: {
     fetch: id => axiosInstance.get(`/pets/users/${id}`),
@@ -61,6 +62,9 @@ export default {
       }
       return axiosInstance.put(`/vet/edit/${idVet}`, form_data);
     },
+    createDocBySearch: request => axiosInstance.post(`/adddocsearch`, request),
+    deactivateDoc: request =>
+      axiosInstance.post(`/deactivateDoc`, request),
   },
   vaccines: {
     fetch: () => axiosInstance.get("/vaccines"),

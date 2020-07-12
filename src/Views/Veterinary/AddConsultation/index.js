@@ -97,7 +97,7 @@ const AddConsultation = props => {
           title="Agregar nueva consulta"
         />
         <Grid container alignItems="center" direction="row" justify="center">
-          <Grid item xs={7}>
+          <Grid item xs={12} md={7}>
             {values.isLoading ? (
               <Container fixed>
                 <Grid

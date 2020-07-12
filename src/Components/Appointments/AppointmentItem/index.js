@@ -25,14 +25,14 @@ const AppointmentItem = ({ date, time, reason, idAppointment, showDate, showCanc
     return (
         <Grid container alignItems="stretch" className={classes.ctn} direction="row" justify="space-between">
             <Grid item md={4} xl={3} xs={4}>
-                <Paper className={classes.paperHourOrDate} elevation={0}>
+                <Paper className={showButtonCancel ? classes.paperHourOrDate : classes.paperHourOrDateOff} elevation={0}>
                     <Typography align="center" className={classes.fontHour} component="h2" variant="h5">
                         {time} hs
                     </Typography>
                 </Paper>
             </Grid>
             <Grid item md={8} xl={9} xs={8}>
-                <Paper className={classes.paperTimeDescription}>
+                <Paper className={showButtonCancel ? classes.paperTimeDescription: classes.paperTimeDescriptionOff}>
                     <Typography component="h3" variant="h5">
                         {showDate && moment(date).format("DD/MM/YYYY")}
                     </Typography>
@@ -41,6 +41,7 @@ const AppointmentItem = ({ date, time, reason, idAppointment, showDate, showCanc
                     </Typography>
                     {showButtonCancel && (
                         <DialogConfirmation
+                            textButton="Cancelar Turno"
                             text="Puedes volver a reservar el turno desde esta misma página"
                             title="¿Estás seguro de cancelar el turno?"
                             onClickConfirm={() => onClickCancelAppointment(idAppointment)}

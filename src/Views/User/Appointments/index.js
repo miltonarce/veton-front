@@ -1,13 +1,13 @@
 import React from "react";
 import { Add } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
-import { CssBaseline, Container, Button, Grid } from "@material-ui/core";
+import { CssBaseline, Container, Button, Grid, CircularProgress } from "@material-ui/core";
 import { AppContext } from "../../../Store";
 import TitlePages from "../../../Components/Shared/TitlePages";
 import { Spinner } from "../../../Components/Notifications";
 import { AppointmentList } from "../../../Components/Appointments";
 import { Api }  from "../../../Services";
-import { styles, AppointmentLink } from "./styles";
+import { styles, AppointmentLink, ContentSpinner } from "./styles";
 
 class Appointments extends React.Component {
   constructor() {
@@ -123,9 +123,12 @@ class Appointments extends React.Component {
                 </Grid>
               </Grid>
             </Grid>
-            {isLoading && <Spinner />}
+            {isLoading &&  <ContentSpinner container
+              alignItems="center"
+              direction="row"
+              justify="center" ><CircularProgress color="secondary" /></ContentSpinner>}
             {!isLoading && error && <p>{error}</p>}
-            {appointments.length > 0 && (
+             {appointments.length > 0 && (
               <AppointmentList
                 appointments={appointments}
                 showCancelation

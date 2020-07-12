@@ -35,7 +35,7 @@ const AppointmentDatePickerUser = ({ idUser }) => {
 
   return (
     <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils}>
-      <DatePicker autoOk orientation="portrait" value={date} variant="static" onChange={changeDate} renderDay={(day, _selectedDate, _isInCurrentMonth, dayComponent) => {
+      <DatePicker autoOk value={date} variant="static" onChange={changeDate} renderDay={(day, _selectedDate, _isInCurrentMonth, dayComponent) => {
         const dateDatepicker = moment(day).format("YYYY-MM-DD");
         const isAppointmentForUser = appointments.includes(dateDatepicker);
         if (isAppointmentForUser) {
