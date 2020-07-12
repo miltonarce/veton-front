@@ -4,6 +4,7 @@ import useStyles from "./styles";
 import {URL_IMAGES} from "../../../Utils/globals";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import "../../../assets/galleryStyles.css";
 
 const History = ({ dataHistory, user }) => {
   const classes = useStyles();
@@ -24,28 +25,27 @@ const History = ({ dataHistory, user }) => {
     }
 
     for(const prop in dataHistory){
-      console.log(prop)
-      if('image_1' == prop){
+      if('image_1' == prop && dataHistory['image_1'] !== null){
         setImages(images => [...images, {
           original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
           thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
       }
-      if('image_2' == prop){
+      if('image_1' == prop && dataHistory['image_2'] !== null){
         setImages(images => [...images, {
           original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
           thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
       }
-      if('image_3' == prop){
+      if('image_1' == prop && dataHistory['image_3'] !== null){
         setImages(images => [...images, {
           original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
           thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
       }
-      if('image_4' == prop){
+      if('image_1' == prop && dataHistory['image_4'] !== null){
         setImages(images => [...images, {
           original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
           thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
       }
-      if('image_5' == prop){
+      if('image_1' == prop && dataHistory['image_5'] !== null){
         setImages(images => [...images, {
           original: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`,
           thumbnail: `${URL_IMAGES}historiesimages/${dataHistory[prop]}`}]);
@@ -61,8 +61,7 @@ const History = ({ dataHistory, user }) => {
     day: "2-digit",
   });
 
-
-  console.log(user);
+   console.log(dataHistory,images);
   return (
     <Grid container alignItems="center" direction="row" justify="space-between">
       <Grid item xs={12} lg={8}>
@@ -149,8 +148,12 @@ const History = ({ dataHistory, user }) => {
         </Grid>
         <Grid item className={classes.rowImg} xs={12}>
           <Grid container alignItems="center" direction="row" justify="center">
-            {/* {images.length > 0*/}{ false ? 
-            <ImageGallery items={images} /> :<img
+            {images.length > 0 ?
+            <ImageGallery items={images}  
+            showBullets={true}
+            showIndex={true}
+            showThumbnails={false}
+            showPlayButton={false}/> :<img
               alt="No hay imágenes cargadas todavía."
               className={classes.hisImg}
               src="/assets/no-image.png"

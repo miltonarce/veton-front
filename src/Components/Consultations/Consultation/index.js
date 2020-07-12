@@ -46,9 +46,6 @@ const Consultation = ({ dataConsultation, user }) => {
     day: "2-digit",
   });
   
-  console.log("CONSULTAS", dataConsultation);
-
-
   return (
     <>
       <Grid container alignItems="center" justify="space-between">

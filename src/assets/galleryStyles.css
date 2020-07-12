@@ -1,0 +1,24 @@
+.image-gallery{
+    width: 160px !important;
+}
+
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    height: 36px  !important;
+    width: 36px  !important;
+}
+
+.image-gallery-fullscreen-button .image-gallery-svg, .image-gallery-play-button .image-gallery-svg {
+    height: 18px !important;
+    width: 18px !important;
+}
+
+.image-gallery-bullets .image-gallery-bullet {
+    padding: 2px !important;
+
+}
+
+.image-gallery-content{
+border-radius: 8px;
+padding: 4px;
+
+}
