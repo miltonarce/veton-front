@@ -52,6 +52,15 @@ export default {
       }
       return axiosInstance.post("/vet", form_data);
     },
+    editVet: (idVet, data) => {
+      // Formdata to send image input... form-url-encoded...
+      const form_data = new FormData();
+      /* eslint no-unused-vars: 0 */
+      for (const key in data) {
+        form_data.append(key, data[key]);
+      }
+      return axiosInstance.put(`/vet/edit/${idVet}`, form_data);
+    },
   },
   vaccines: {
     fetch: () => axiosInstance.get("/vaccines"),

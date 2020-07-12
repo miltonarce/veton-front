@@ -260,6 +260,28 @@ class VetDetail extends React.Component {
                                 </Grid>
                               </Grid>
                             </Grid>
+                            <Grid item  xs={12}>
+                                  <Grid
+                                    container
+                                    alignItems="center"
+                                    direction="row"
+                                    justify="flex-end"
+                                  >
+                                    <DocLink
+                                      to={{
+                                        pathname: `/admin-vet/edit-vet/${id_vet}`,
+                                        state: id_vet,
+                                      }}
+                                    >
+                                      <Button
+                                        color="secondary"
+                                        variant="contained"
+                                      >
+                                        EDITAR
+                                      </Button>
+                                    </DocLink>
+                                  </Grid>
+                                </Grid>
                           </Grid>
                         </Grid>
                       </Grid>

@@ -8,6 +8,7 @@ import HomeAdmin from "./HomeAdmin";
 import VetDetail from "./VetDetail";
 import AddDoc from "./AddDoc";
 import AddVet from "./AddVet";
+import EditVet from "./EditVet";
 import Header from "../../Components/Shared/AdminVet/Header";
 import Footer from "../../Components/Shared/Footer";
 
@@ -59,6 +60,7 @@ class Admin extends React.Component {
           <Route component={VetDetail} path={`${match.path}/veterinary/:id`} />
           <Route component={AddDoc} path={`${match.path}/add-doc`} />
           <Route component={AddVet} path={`${match.path}/add-vet`} />
+          <Route component={EditVet} path={`${match.path}/edit-vet/:id`} />
           </ContainerMain>
         <Footer />
       </ContentMain>
