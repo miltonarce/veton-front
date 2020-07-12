@@ -45,6 +45,10 @@ const Header = ({onUserSelected, classes}) => {
               <Home className={classes.Icons} />
               Inicio
             </Link>
+            <div className={classes.ContentWelcome}>
+              <p>Bienvenido/a:</p>
+              <p className={classes.ContentUserData}>{user.email}</p>
+            </div>
             <div className={classes.ContentLink}>
               <div>
                 {userImage
@@ -54,6 +58,7 @@ const Header = ({onUserSelected, classes}) => {
                   aria-controls="simple-menu"
                   aria-haspopup="true"
                   onClick={handleClick}
+                  className={classes.ContentAvatar}
                   />
                   : <AccountCircle
                   aria-controls="simple-menu"
@@ -70,20 +75,16 @@ const Header = ({onUserSelected, classes}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link className={classes.ContentLink} to="/veterinary/profile">
+                <Link className={classes.ContentLinkMenu} to="/veterinary/profile">
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
                 </Link>
-                <Link className={classes.ContentLink} to="/">
+                <Link className={classes.ContentLinkMenu} to="/">
                   <MenuItem onClick={() => {
                     localStorage.clear();
                     handleClose();
                   }}>Salir</MenuItem>
                 </Link>
               </Menu>
-            </div>
-            <div className={classes.ContentWelcome}>
-              <p>Bienvenido/a:</p>
-              <p className={classes.ContentUserData}>{user.email}</p>
             </div>
           </Container>
         </Toolbar>

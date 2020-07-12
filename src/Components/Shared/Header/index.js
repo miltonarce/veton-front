@@ -50,6 +50,10 @@ const Header = ({ classes }) => {
               <Pets className={classes.Icons} />
               Mascotas
             </Link>
+            <div className={classes.ContentWelcome}>
+              <p>Bienvenido/a:</p>
+              <p className={classes.ContentUserData}>{user.email}</p>
+            </div>
             <div className={classes.ContentLink}>
               <div>
                 {userImage
@@ -59,6 +63,7 @@ const Header = ({ classes }) => {
                   aria-controls="simple-menu"
                   aria-haspopup="true"
                   onClick={handleClick}
+                  className={classes.ContentAvatar}
                   />
                   : <AccountCircle
                   aria-controls="simple-menu"
@@ -75,20 +80,16 @@ const Header = ({ classes }) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link className={classes.ContentLink} to="/user/profile">
+                <Link className={classes.ContentLinkMenu} to="/user/profile">
                   <MenuItem onClick={handleClose}>Perfil</MenuItem>
                 </Link>
-                <Link className={classes.ContentLink} to="/">
+                <Link className={classes.ContentLinkMenu} to="/">
                   <MenuItem onClick={() => {
                     localStorage.clear();
                     handleClose();
                   }}>Salir</MenuItem>
                 </Link>
               </Menu>
-            </div>
-            <div className={classes.ContentWelcome}>
-              <p>Bienvenido/a:</p>
-              <p className={classes.ContentUserData}>{user.email}</p>
             </div>
           </Container>
         </Toolbar>

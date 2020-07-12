@@ -15,6 +15,20 @@ export default {
     ContentLink: {
         marginRight: "2rem",
         textDecoration: "none",
+        cursor: "pointer",
+        color: "#999999",
+        "&:hover": {
+            color: "#5c2299",
+            transition: ".5s",
+        },
+        fontSize: "1rem",
+    textTransform: "uppercase",
+    fontWeight: "700",
+    display: "flex",
+    alignItems: "center"
+    },
+    ContentLinkMenu: {
+        textDecoration: "none",
         color: "#999999",
         "&:hover": {
             color: "#5c2299",
@@ -24,12 +38,21 @@ export default {
     ContentWelcome:{
         color: "#999999",
         display: "flex",
+        marginRight: "1rem",
+        marginLeft: "3rem",
+        fontSize: ".8rem",
+        flexDirection: "column",
+        alignItems: "center",
+        "& p:first-child":{
+            margin: 0
+        }
     },
     ContentUserData:{
-        color: "#333333",
-        marginLeft: ".5rem"
+        color: "#5c2299",
+        fontSize: ".8rem",
+        margin: "0",
     },
-    ContentIcon: { marginRight: ".5rem", cursor: "pointer" },
+    ContentIcon: { marginRight: ".5rem", cursor: "pointer",  },
     ContainerFlex: {
         display: "flex",
         position: "relative",
@@ -39,4 +62,11 @@ export default {
         verticalAlign: "text-bottom",
         marginRight: "10px",
     },
+    ContentAvatar:{
+        border: "1.5px solid #FF2E93",
+        padding: "3px",
+        "& img": {
+            borderRadius: "50%"
+        }
+    }
 };

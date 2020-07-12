@@ -41,7 +41,7 @@ const ListHistories = ({ histories }) => {
         {histories.map((history, index) => (
           <Tab
             key={index}
-            label={`#ID HISTORIA ${history.id_history}`}
+            label={history.veterinary.fantasy_name}
             {...a11yProps(index)}
           />
         ))}

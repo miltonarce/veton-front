@@ -36,6 +36,7 @@ export default {
         boxShadow: "0px 3px 11px 5px rgba(0, 0, 0, 0.16)",
         borderRadius: "123px",
         left: "2rem",
+        objectFit: "cover"
     },
     petName: {
         color: "#4E4E4E",

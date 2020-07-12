@@ -12,6 +12,14 @@ const useStyles = makeStyles(theme => ({
         height: "100%",
         userSelect: "none",
     },
+    paperTimeDescriptionOff:{
+        padding: theme.spacing(3, 2),
+        backgroundColor: "#999999",
+        color: "#fff",
+        borderRadius: "23px",
+        height: "100%",
+        userSelect: "none",
+    },  
     paperHourOrDate: {
         backgroundColor: "#fff",
         color: "#FE3090",
@@ -22,6 +30,19 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "center",
         userSelect: "none",
+    borderRadius:" 0px 23px 23px 0px"
+    },
+    paperHourOrDateOff:{
+        backgroundColor: "#fff",
+        color: "#999999",
+        padding: theme.spacing(3, 2),
+        borderRadius: 0,
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        userSelect: "none",
+    borderRadius:" 0px 23px 23px 0px"
     },
     fontHour: {
         fontWeight: 800,

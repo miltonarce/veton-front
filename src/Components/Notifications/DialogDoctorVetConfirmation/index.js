@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const DialogConfirmation = ({ textButton, title, text, onClickConfirm }) => {
+const DialogDoctorVetConfirmation = ({ buttonText ,title, text, onClickConfirm }) => {
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -17,9 +17,9 @@ const DialogConfirmation = ({ textButton, title, text, onClickConfirm }) => {
     }
 
     return (
-        <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-            <Button color="primary" size="small" variant="contained" onClick={handleClickOpen}>
-                {textButton}
+        <Grid container alignItems="flex-start" justify="center" direction="row">
+            <Button color="primary" size="medium" variant="contained" onClick={handleClickOpen}>
+                DESACTIVAR
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{title}</DialogTitle>
@@ -35,4 +35,4 @@ const DialogConfirmation = ({ textButton, title, text, onClickConfirm }) => {
     );
 }
 
-export default DialogConfirmation;
+export default DialogDoctorVetConfirmation;

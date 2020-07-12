@@ -24,6 +24,7 @@ class VetDetail extends React.Component {
     docsList: [],
     isLoading: true,
     error: null,
+    somethingToUpdate: null,
   };
 
   // Retrieve detail vet by id
@@ -308,7 +309,7 @@ class VetDetail extends React.Component {
                 </Grid>
               </Grid>
               <ContainerMain>
-                <ListDocsVets doctors={docsList} />
+                <ListDocsVets doctors={docsList} id_vet={id_vet} />
               </ContainerMain>
             </Grid>
           ) : (

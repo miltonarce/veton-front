@@ -54,6 +54,8 @@ export default {
       return axiosInstance.post("/vet", form_data);
     },
     createDocBySearch: request => axiosInstance.post(`/adddocsearch`, request),
+    deactivateDoc: request =>
+      axiosInstance.post(`/deactivateDoc`, request),
   },
   vaccines: {
     fetch: () => axiosInstance.get("/vaccines"),
