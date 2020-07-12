@@ -93,7 +93,7 @@ const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1
                 </ButtonDetailsVet>
               : 
                 <VetLink
-                  to={`admin-vet/veterinary/${id_veterinary}`}
+                  to={`veterinary/${id_veterinary}`}
                 >
                   <ButtonDetailsVet color="primary" variant="contained">
                     VER DETALLES
