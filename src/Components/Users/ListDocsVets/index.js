@@ -16,7 +16,7 @@ const ListDocsVets = ({doctors, id_vet, onDoctorDeactivate}) => {
             direction="row"
             justify="center"
           >
-            <CardDocVet {...doctor} id_veterinary={id_vet} onDoctorDeactivate={() => onDoctorDeactivate(doctor)} />
+            <CardDocVet {...doctor} id_veterinary={id_vet} onDoctorDeactivate={onDoctorDeactivate} />
           </Grid>
         </GridList>
       ))}

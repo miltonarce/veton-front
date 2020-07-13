@@ -24,16 +24,15 @@ class VetDetail extends React.Component {
     docsList: [],
     isLoading: true,
     error: null,
-    doctorDeactivate: null,
   };
   
 
-  // Retrieve detail vet by id
-  async componentDidMount() {
+  getInfo = async () => {
     const {match} = this.props;
     const {state} = this;
     try {
       const {data} = await ApiAdminVet.veterinary.fetch(match.params.id);
+      console.log(data)
       this.setState({
         ...state,
         dataVet: data.veterinary,
@@ -44,22 +43,10 @@ class VetDetail extends React.Component {
       this.setState({...state, isLoading: false, error: true});
     }
   }
-
-  // If change prop doctorDeactivate, fetch again pets by the new user...
-  async componentDidUpdate(prevProps) {
-    const {match} = this.props;
-    if (prevProps.doctorDeactivate !== this.props.doctorDeactivate) {
-      await ApiAdminVet.veterinary.fetch(match.params.id);
-    }
+  // Retrieve detail vet by id
+  async componentDidMount() {
+    this.getInfo();
   }
-
-  /**
-   * Method to handle when user select any user from autocomplete component
-   * @param {object} userSelected
-   * @returns {void}
-   */
-  handleOnDoctorDeactivate = doctorDeactivate =>
-    this.setState({ ...this.state, doctorDeactivate });
 
   formatter = new Intl.DateTimeFormat("es-AR", {
     year: "numeric",
@@ -72,8 +59,7 @@ class VetDetail extends React.Component {
     const {dataVet, docsList, isLoading, error} = this.state;
     const id_vet = dataVet.id_veterinary;
     const {
-      handleOnDoctorDeactivate,
-      auth: {user},
+       auth: {user},
     } = this.context;
     if (isLoading) {
       return (
@@ -349,7 +335,7 @@ class VetDetail extends React.Component {
                 </Grid>
               </Grid>
               <ContainerMain>
-                <ListDocsVets doctors={docsList} id_vet={id_vet} onDoctorDeactivate={handleOnDoctorDeactivate} />
+                <ListDocsVets doctors={docsList} id_vet={id_vet} onDoctorDeactivate={this.getInfo} />
               </ContainerMain>
             </Grid>
           ) : (
@@ -378,7 +364,7 @@ class VetDetail extends React.Component {
                   <DocLink
                     to={{
                       pathname: `/admin-vet/add-doc`,
-                      state: id_vet,
+                      state: id_vet, 
                     }}
                   >
                     <Button

@@ -5,7 +5,7 @@ import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { withStyles } from "@material-ui/core/styles";
 import ListItemUsersDoctor from "../ListItemUsersDoctor";
-import { ApiVet}  from "../../../Services";
+import { ApiVet }  from "../../../Services";
 import styles from "./styles";
 
 class AutocompleteDoctor extends React.Component {
@@ -13,6 +13,7 @@ class AutocompleteDoctor extends React.Component {
     super(props);
     this.state = {
       users: [],
+      docsListWorking: [],
       showListUsers: false,
       loading: false,
       hasMsg: null,
@@ -22,6 +23,22 @@ class AutocompleteDoctor extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleUserSelected = this.handleUserSelected.bind(this);
   }
+
+  async componentDidMount() {
+      const {idVet} = this.props;
+      const {state} = this;
+      try {
+        const {data} = await ApiVet.users.doctorVetAlreadyWorking(idVet);
+        this.setState({
+          ...state,
+          docsListWorking: data.doctors,
+          isLoading: false,
+        });
+      } catch (error) {
+        this.setState({...state, isLoading: false, error: true});
+      }
+
+}
 
   /**
    * Method to handle when change value to fetch new users by input
@@ -33,8 +50,22 @@ class AutocompleteDoctor extends React.Component {
     if (value.length >= 1) {
       try {
         this.setState({ ...this.state, loading: true });
-        const { data } = await ApiVet.users.autocompleteDoctor(value);
-        this.setState({ ...this.state, users: data, loading: false });
+        
+        const {data} = await ApiVet.users.autocompleteDoctor(value);
+        
+        data.forEach(k => {
+          if (this.state.docsListWorking.some(d => d.dni === k.dni)){
+            data.map(function(e){
+              e.working = "yes";
+            });
+            this.setState({ ...this.state, users: data, loading: false });
+          }else {
+            data.map(function(e){
+              e.working = "no";
+            });
+            this.setState({ ...this.state, users: data, loading: false });
+          }
+        });
       } catch (err) {
         this.setState({ ...this.state, users: [], loading: false });
       }

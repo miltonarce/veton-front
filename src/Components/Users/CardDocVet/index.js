@@ -38,7 +38,6 @@ class CardDocVet extends Component {
       this.setState({...state, isLoading: true});
       const {data} = await ApiVet.veterinaries.deactivateDoc(request);
       if (data.success) {
-        // onDoctorDeactivate();
         this.setState({
           ...state,
           isLoading: false,
@@ -47,8 +46,8 @@ class CardDocVet extends Component {
           success: data.success,
         });
         setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+          onDoctorDeactivate();
+        }, 1500);
       } else {
         this.setState({
           ...state,
