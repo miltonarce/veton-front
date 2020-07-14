@@ -31,6 +31,11 @@ const findFreeHours = appointments => {
 }
 
 export { calculateAge, findFreeHours };
-export const URL_BASE = "http://localhost/veton/veton-back/public/api/";
-export const URL_IMAGES = "http://localhost/veton/veton-back/public/imgs/";
+//local
+// export const URL_BASE = "http://localhost/veton/veton-back/public/api/";
+// export const URL_IMAGES = "http://localhost/veton/veton-back/public/imgs/";
+//server
+export const URL_BASE = "http://veton-back.herokuapp.com/api/";
+export const URL_IMAGES = "http://veton-back.herokuapp.com/imgs/";
+
 
