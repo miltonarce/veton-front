@@ -36,6 +36,7 @@ export default {
   },
   veterinaries: {
     fetch: () => axiosInstance.get("/veterinaries"),
+    fetchForUser: (idUserVet) => axiosInstance.get(`/veterinaries-to-work/${idUserVet}`),
     createDoc: data => {
       // Formdata to send image input... form-url-encoded...
       const form_data = new FormData();
@@ -73,4 +74,5 @@ export default {
   dewormers: {
     fetch: () => axiosInstance.get("/dewormers"),
   }
+
 };

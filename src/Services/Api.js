@@ -18,8 +18,8 @@ export default {
       }
       return axiosInstance.post("/pets", form_data);
     },
-    lastPetsByVet: idUser =>
-      axiosInstance.get(`pets/last/veterinary/${idUser}`),
+    lastPetsByVet: (idUser, idVet) =>
+      axiosInstance.get(`pets/last/veterinary/${idUser}/${idVet}`),
   },
   clinicalhistories: {
     create: (idPet, request) =>{

@@ -39,6 +39,9 @@ const theme = createMuiTheme({
       fontSize: "2rem",
     },
   },
+  '.MuiBadge-badge':{
+      fontSize: '10px',
+  },
   overrides: {
     MuiButton: {
       root: {
