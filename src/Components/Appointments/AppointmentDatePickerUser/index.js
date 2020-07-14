@@ -7,13 +7,22 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import { Badge } from "@material-ui/core";
 import { Api } from "../../../Services";
 import "moment/locale/es";
+import { makeStyles } from "@material-ui/core/styles";
 
 moment.locale("es");
+
+const useStyles =  makeStyles(() => ({
+  Badge:{
+    '& span': {
+      fontSize: '10px'
+    }
+  }
+}));
 
 const AppointmentDatePickerUser = ({ idUser }) => {
   const [date, changeDate] = useState(new Date());
   const [appointments, setAppointments] = useState([]);
-
+  const classes = useStyles();
   /**
    * Fetch all appointments by the user to show in Datepicker
    * @returns {Promise<void>}
@@ -41,7 +50,7 @@ const AppointmentDatePickerUser = ({ idUser }) => {
         if (isAppointmentForUser) {
           return (
             <Link to="/user/appointments">
-              <Badge badgeContent="Turno" color="secondary" style={{ backgroundColor: "#ddd", borderRadius: "50%" }}>
+              <Badge badgeContent="Turno" className={classes.Badge} color="secondary" style={{ backgroundColor: "#ddd", borderRadius: "50%"}}>
                 {dayComponent}
               </Badge>
             </Link>

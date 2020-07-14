@@ -8,9 +8,11 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import { ListPets } from "../../../Components/Pets";
 import { AppointmentListWithDate } from "../../../Components/Appointments";
-import { Api } from "../../../Services";
+import { Api, ApiVet } from "../../../Services";
 import { AppContext } from "../../../Store";
 import styles from "./styles";
+import ModalVets from "../../../Components/Notifications/ModalVets";
+
 
 class HomeVet extends React.Component {
   state = {
@@ -18,26 +20,62 @@ class HomeVet extends React.Component {
     petsByUser: [],
     userSelected: null,
     lastPetsAttended: [],
-    isLoadingLastPets: false,
+    isLoadingLastPets: true,
+    veterinariesForUser: null,
+    idVet: null,
   };
 
-  // If change prop userSelected, fetch again pets by the new user...
-  async componentDidUpdate(prevProps) {
-    if (prevProps.userSelected !== this.props.userSelected) {
-      await this.fetchPetsByUser(this.props.userSelected);
-    }
-  }
+  // // If change prop userSelected, fetch again pets by the new user...
+  // async componentDidUpdate(prevProps) {
+    
+  // }
 
   // Retrieve the last pets atendend by veterinary...
   async componentDidMount() {
     try {
       const {
         auth: { user },
+        veterinary_id
       } = this.context;
       this.setState({ ...this.state, isLoadingLastPets: true });
+
+        const {data: {success , veterinariesForUser}} = await ApiVet.veterinaries.fetchForUser(user.id_user);
+        
+        if(success){
+          this.setState({
+                ...this.state,
+                veterinariesForUser
+              });
+        } else {
+            this.setState({
+              ...this.state,
+              veterinariesForUser: [],
+            });
+          }
+    } catch (err) {
+      console.error("err", err);
+      this.setState({
+        ...this.state,
+        veterinariesForUser: [],
+      });
+    }
+  }
+
+ async  componentDidUpdate(prevProps, prevState){
+  if (prevProps.userSelected !== this.props.userSelected) {
+    await this.fetchPetsByUser(this.props.userSelected);
+  }
+   if(prevState.idVet !== this.state.idVet){
+    try{
       const {
+        auth: { user },
+        veterinary_id
+      } = this.context;
+     if(veterinary_id){
+ 
+        const {
         data: { success, pets },
-      } = await Api.pets.lastPetsByVet(user.id_user);
+      } = await Api.pets.lastPetsByVet(user.id_user, veterinary_id);
       if (success) {
         this.setState({
           ...this.state,
@@ -51,7 +89,8 @@ class HomeVet extends React.Component {
           lastPetsAttended: [],
         });
       }
-    } catch (err) {
+    }
+    }catch (err) {
       console.error("err", err);
       this.setState({
         ...this.state,
@@ -59,6 +98,9 @@ class HomeVet extends React.Component {
         lastPetsAttended: [],
       });
     }
+   }
+   
+    
   }
 
   /**
@@ -76,6 +118,13 @@ class HomeVet extends React.Component {
     }
   };
 
+  setVet = idVet => {
+    const {setVeterinary} = this.context;
+    this.setState({...this.state, idVet})
+    setVeterinary(idVet);
+  }
+
+
   render() {
     const {
       petsByUser,
@@ -89,7 +138,25 @@ class HomeVet extends React.Component {
       auth: {
         user: { id_veterinary },
       },
+      veterinary_id
     } = this.context;
+
+    const {veterinariesForUser} = this.state;
+
+    console.log(petsByUser);
+
+    if(!veterinary_id){
+      return (
+        <>
+          <CssBaseline />
+        <Container fixed component="section">
+          <ModalVets data={veterinariesForUser} onClickConfirm={this.setVet}/>
+        </Container>
+        </>
+      )
+    }
+
+
     return (
       <>
         <CssBaseline />

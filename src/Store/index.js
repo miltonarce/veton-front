@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null;
   const [logged, setLogged] = useState(auth);
   const [user, setUser] = useState(userData);
+  const [veterinary_id, setId] = useState(null);
 
   useEffect(() => {
     if (logged !== null && user !== null) {
@@ -20,10 +21,14 @@ const AppProvider = ({ children }) => {
       setLogged(auth.logged);
       setUser(auth.user);
     },
+    setVeterinary: id => {
+      setId(id);
+    },
     auth: {
       logged,
-      user
-    }
+      user,
+    },
+    veterinary_id,
   };
 
   return <AppContext.Provider value={defaultContext}>{children}</AppContext.Provider>
