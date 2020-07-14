@@ -4,6 +4,10 @@ import { findFreeHours, URL_BASE } from "../Utils/globals";
 const axiosInstance = axios.create({
   baseURL: URL_BASE,
   timeout: 10000,
+  headers: {
+    "X-Requested-With": "XMLHttpRequest",
+    "Content-Type": "application/json; charset=utf-8",
+  },
 });
 
 export default {
