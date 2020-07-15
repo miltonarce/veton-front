@@ -27,6 +27,7 @@ const CardVetMedia = styled(CardMedia)({
     top: "-14px",
     left: "46px",
     boxShadow: "0px 3px 11px 5px rgba(0, 0, 0, 0.16)",
+    objectFit: "cover",
 });
 
 const ContentMedia = styled("figure")({
