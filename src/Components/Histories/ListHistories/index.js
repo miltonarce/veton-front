@@ -32,7 +32,7 @@ const ListHistories = ({ histories }) => {
       <Tabs
         aria-label="Vertical tabs"
         className={classes.tabs}
-        orientation="vertical"
+        orientation={window.screen.width >= 600 ? `vertical`: `horizontal`}
         value={value}
         variant="scrollable"
         onChange={handleChange}

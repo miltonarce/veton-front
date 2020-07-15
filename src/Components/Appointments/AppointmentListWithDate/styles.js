@@ -4,7 +4,8 @@ const useStyles = makeStyles(() => ({
     title: {
         color: "rgb(254, 48, 144)",
         textAlign: "center",
-        marginTop: "37px",
+        marginTop: "31px",
+        marginBottom: "26px"
     },
     icons: {
         color: "#fff",

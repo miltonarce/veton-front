@@ -181,7 +181,7 @@ class AutocompleteDoctor extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchOutlined />
+                <SearchOutlined color="primary"/>
               </InputAdornment>
             ),
             disableUnderline: true,

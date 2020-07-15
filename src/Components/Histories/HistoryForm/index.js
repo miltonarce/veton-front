@@ -158,7 +158,7 @@ class HistoryForm extends React.Component {
                 container
                 alignItems="center"
                 direction="row"
-                justify="space-between"
+                justify="space-around"
               >
                 <Grid item xs={3}>
                   <span>(*) Datos obligatorios.</span>

@@ -61,7 +61,6 @@ const History = ({ dataHistory, user }) => {
     day: "2-digit",
   });
 
-   console.log(dataHistory,images);
   return (
     <Grid container alignItems="center" direction="row" justify="space-between">
       <Grid item xs={12} lg={8}>

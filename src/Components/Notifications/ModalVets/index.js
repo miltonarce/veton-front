@@ -72,7 +72,10 @@ const ModalVets = ({  onClickConfirm, data }) => {
                     <DialogContentText> {
                     data ?
                     data.length > 0 ?
-                    (<><div className={classes.contentVets}> {data.map(v => (<div className={classes.cardVet} onClick={() => onClickConfirm(v.id_veterinary)}>
+                    (<><Grid container direction="column" justify="center"  spacing={2}><div className={classes.contentVets}> {data.map(v => (
+                      
+                    <Grid item xs={12}>
+                    <div className={classes.cardVet} onClick={() => onClickConfirm(v.id_veterinary)}>
                             <figure>
                                 <img  className={classes.ImageVet} src={
                             v.image
@@ -82,7 +85,11 @@ const ModalVets = ({  onClickConfirm, data }) => {
                             </figure>
                         <p className={classes.nameVet}>{v.fantasy_name}</p>
                         <p className={classes.streetVet}>En <em>{v.street}</em></p>
-                            </div>))}</div><div className={classes.Close}><Button type="button" color="Primary" onClick={() => {localStorage.clear();handleClose();}}>Salir</Button></div></>) :
+                            </div>
+                            </Grid>
+                            ))}</div>
+                            </Grid>
+                            <div className={classes.Close}><Button type="button" color="Primary" onClick={() => {localStorage.clear();handleClose();}}>Salir</Button></div></>) :
                            (
                              <>
                             <p className={classes.noVets}>Aún no  cuenta con veterinarias asignadas</p>

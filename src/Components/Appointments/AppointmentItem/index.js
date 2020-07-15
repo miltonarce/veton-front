@@ -24,17 +24,20 @@ const AppointmentItem = ({ date, time, reason, idAppointment, showDate, showCanc
 
     return (
         <Grid container alignItems="stretch" className={classes.ctn} direction="row" justify="space-between">
-            <Grid item md={4} xl={3} xs={4}>
+            <Grid item md={4} xl={4} xs={4}>
                 <Paper className={showButtonCancel ? classes.paperHourOrDate : classes.paperHourOrDateOff} elevation={0}>
                     <Typography align="center" className={classes.fontHour} component="h2" variant="h5">
                         {time} hs
                     </Typography>
                 </Paper>
             </Grid>
-            <Grid item md={8} xl={9} xs={8}>
+            <Grid item md={8} xl={8} xs={8}>
                 <Paper className={showButtonCancel ? classes.paperTimeDescription: classes.paperTimeDescriptionOff}>
                     <Typography component="h3" variant="h5">
                         {showDate && moment(date).format("DD/MM/YYYY")}
+                    </Typography>
+                    <Typography component="p" className={classes.reason}>
+                        Consulta
                     </Typography>
                     <Typography component="p" className={classes.reason}>
                         {reason}

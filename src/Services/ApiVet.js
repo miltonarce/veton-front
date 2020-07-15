@@ -66,7 +66,7 @@ export default {
       for (const key in data) {
         form_data.append(key, data[key]);
       }
-      return axiosInstance.put(`/vet/edit/${idVet}`, form_data);
+      return axiosInstance.post(`/vet/edit/${idVet}`, form_data);
     },
     createDocBySearch: request => axiosInstance.post(`/adddocsearch`, request),
     deactivateDoc: request =>

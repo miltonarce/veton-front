@@ -6,6 +6,9 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         display: "flex",
         borderRadius: "23px",
+        ['@media (max-width: 600px)']: { 
+            display: 'block'
+            }
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,

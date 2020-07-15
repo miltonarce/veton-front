@@ -51,6 +51,7 @@ const EditHistory = props => {
    * @returns {void}
    */
   const handleOnSubmit = async dataEdited => {
+    setValues({ ...values,  isLoading: true });
     try {
       const { data } = await ApiVet.clinicalhistories.edit(
         values.dataHistory.id_history,
@@ -62,14 +63,13 @@ const EditHistory = props => {
         enqueueSnackbar(data.msg, { variant: "success" });
       } else {
         enqueueSnackbar(data.msg, { variant: "error" });
+        setValues({ ...values,  isLoading: false });
       }
-      setTimeout(() => {
         props.history.goBack();
-      }, 3000);
     } catch (err) {
       if (err.response && err.response.data) {
         const { errors } = err.response.data;
-        setValues({ ...values, errors });
+        setValues({ ...values, isLoading: false, errors });
       }
     }
   };

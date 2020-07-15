@@ -57,7 +57,7 @@ class HomeUser extends React.Component {
             spacing={2}
           >
               
-            <Grid item md={3} lg={3}  sm={8} xs={12} component="aside">
+            <Grid item md={4} lg={3}  sm={8} xs={12} component="aside">
               <AppointmentDatePickerUser idUser={user.id_user} />
             </Grid>
             <Grid item md={5}  lg={5} xs={12}>

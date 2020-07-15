@@ -30,7 +30,7 @@ export default {
     },
     LabelUpload: {
     padding: "8px 10px",
-    background: "#5c2299",
+    background: "#ff2e93",
     color: "#fff",
     border: "0px solid #fff",
     borderRadius: "8px",

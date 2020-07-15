@@ -2,7 +2,6 @@ import React, {useState, useContext} from "react";
 import { Container, Grid, CircularProgress} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { AppointmentForm } from "../../../Components/Appointments";
-import { ModalMsg } from "../../../Components/Notifications";
 import { AppContext } from "../../../Store";
 import { Api } from "../../../Services";
 import TitlePages from "../../../Components/Shared/TitlePages";
@@ -64,7 +63,6 @@ const AddAppointment = (props) => {
     }
   };
   const { isLoading, errors } = state;
- console.log("cargando",isLoading)
     return (
       <Container fixed component="section">
         <TitlePages

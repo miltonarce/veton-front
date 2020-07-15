@@ -25,7 +25,7 @@ const Header = ({onUserSelected, classes}) => {
   const userImage = user.image;
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"  style={{position: 'absolute'}}>
       <nav>
         <Toolbar className={classes.Appbar}>
           <Container fixed className={classes.ContainerFlex}>

@@ -1,11 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+import {URL_IMAGES_ASSETS} from "../../../Utils/globals";
 const useStyles = makeStyles({
     Content: {
         height: "100vh",
         overflowY: "auto",
         display: "flex",
-        backgroundImage: "url('assets/pattern-veton.jpg')",
+        backgroundImage: `url('${URL_IMAGES_ASSETS}assets/pattern-veton.jpg')`,
         backgroundSize: "cover",
     },
     PaperLogin: {
