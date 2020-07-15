@@ -1,3 +1,5 @@
+import {URL_IMAGES_ASSETS} from "../../../../Utils/globals";
+
 export default {
     Appbar: {
         background: "white",
@@ -5,7 +7,7 @@ export default {
     Logo: {
         width: "121px",
         height: "42px",
-        backgroundImage: "url('assets/Logo.png')",
+        backgroundImage: `url('${URL_IMAGES_ASSETS}assets/Logo.png')`,
         fontSize: 0,
     },
     ContentLogo: { flexGrow: 1 },

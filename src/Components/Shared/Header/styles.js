@@ -1,3 +1,5 @@
+import {URL_IMAGES_ASSETS} from "../../../Utils/globals";
+
 export default {
     Appbar: {
         background: "white",
@@ -5,7 +7,7 @@ export default {
     Logo: {
         width: "121px",
         height: "42px",
-        backgroundImage: "url('assets/Logo.png')",
+        backgroundImage: `url('${URL_IMAGES_ASSETS}assets/Logo.png')`,
         fontSize: 0,
     },
     ContentLogo: { flexGrow: 1 },
@@ -45,7 +47,10 @@ export default {
         alignItems: "center",
         "& p:first-child":{
             margin: 0
-        }
+        },
+        ['@media (max-width: 600px)']: { 
+            display: 'none'
+            }
     },
     ContentUserData:{
         color: "#5c2299",
@@ -57,6 +62,9 @@ export default {
         display: "flex",
         position: "relative",
         alignItems: "center",
+        ['@media (max-width: 960px)']: { 
+            display: 'none'
+            }
     },
     Icons: {
         verticalAlign: "text-bottom",

@@ -14,6 +14,7 @@ import {
   Avatar,
   InputLabel,
   Paper,
+  CircularProgress
 } from "@material-ui/core";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { withStyles } from "@material-ui/core/styles";
@@ -30,6 +31,7 @@ import {URL_IMAGES} from "../../../Utils/globals";
 class AppointmentForm extends React.Component {
   state = {
     hours: [],
+    loadingHours: false,
     veterinaries: [],
     veterinarySelected: null,
     request: {
@@ -48,7 +50,6 @@ class AppointmentForm extends React.Component {
   async componentDidMount() {
     try {
       const { data } = await ApiVet.veterinaries.fetch();
-      console.log(data);
       if(data.success){
         this.setState({ ...this.state, veterinaries: data.veterinaries });
       }
@@ -72,6 +73,7 @@ class AppointmentForm extends React.Component {
   handleOnDateChange = async date => {
     this.setState({
       ...this.state,
+      loadingHours: true,
       request: {
         ...this.state.request,
         date,
@@ -82,7 +84,7 @@ class AppointmentForm extends React.Component {
         date,
         this.state.veterinarySelected.id_veterinary
       );
-      this.setState({ ...this.state, hours });
+      this.setState({ ...this.state, loadingHours: false, hours });
     } catch (err) {
 
     }
@@ -183,6 +185,7 @@ class AppointmentForm extends React.Component {
         veterinarySelected,
         errorAutocomplete,
         errorHour,
+        loadingHours
       },
     } = this;
     return (
@@ -247,15 +250,17 @@ class AppointmentForm extends React.Component {
                 justify="space-between"
                 spacing={2}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <AppointmentDatePicker
                     defaultValue={new Date()}
                     isDisabled={veterinarySelected === null}
                     onDateChange={handleOnDateChange}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <AppointmentHourPicker
+                <Grid item xs={12} md={6}>
+                  {loadingHours ? <CircularProgress color="secondary" />:(
+                    <>
+                        <AppointmentHourPicker
                     hours={hours}
                     label="Seleccioná un horario"
                     onHourChange={handleOnHourChange}
@@ -265,6 +270,8 @@ class AppointmentForm extends React.Component {
                       Debes seleccionar un horario
                     </FormHelperText>
                   )}
+                    </>
+                  ) }
                 </Grid>
               </Grid>
               <FormControl fullWidth>

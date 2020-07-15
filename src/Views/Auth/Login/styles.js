@@ -1,9 +1,11 @@
+import {URL_IMAGES_ASSETS} from "../../../Utils/globals";
+
 export default {
     Content: {
         height: "100vh",
         overflowY: "auto",
         display: "flex",
-        backgroundImage: "url('assets/pattern-veton.jpg')",
+        backgroundImage: `url('${URL_IMAGES_ASSETS}assets/pattern-veton.jpg')`,
         backgroundSize: "cover",
     },
     PaperLogin: {

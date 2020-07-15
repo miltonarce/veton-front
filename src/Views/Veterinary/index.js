@@ -13,6 +13,8 @@ import Header from "../../Components/Shared/Veterinary/Header";
 import PetDetail from "./PetDetail";
 import Profile from "./Profile";
 import Footer from "../../Components/Shared/Footer";
+import {URL_IMAGES_ASSETS} from "../../Utils/globals";
+
 
 const ContentMain = styled("div")({
   width: "100%",
@@ -21,7 +23,7 @@ const ContentMain = styled("div")({
   position: "absolute",
   height: "100vh",
   overflowX: "hidden",
-  backgroundImage: "url('assets/pattern-veton2.png')",
+  backgroundImage: `url('${URL_IMAGES_ASSETS}assets/pattern-veton2.png')`,
   backgroundSize: "cover",
 });
 
@@ -53,7 +55,7 @@ class Veterinary extends React.Component {
       <ContentMain>
         <CssBaseline />
         <Header onUserSelected={handleOnUserSelected} />
-        <ContainerMain>
+        <ContainerMain  style={{paddingTop: '3.5rem'}}>
           <Route
             exact
             path={match.path}

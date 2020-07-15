@@ -6,4 +6,7 @@ export default {
         paddingLeft: "10px",
         marginLeft: "3rem",
     },
+    spinner:{
+        background: "white"
+    }
 };

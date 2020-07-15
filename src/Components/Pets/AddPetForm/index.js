@@ -353,7 +353,7 @@ class AddPetForm extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={6}>
                 <label className={classes.Label}>Agregar una imágen</label>
-                <label for="imagePet" className={classes.LabelUpload}>
+                <label htmlFor="imagePet" className={classes.LabelUpload}>
                   <CloudUploadOutlined className={classes.IconUpload} /> Subir archivo
                 </label>
                             <input
@@ -381,7 +381,7 @@ class AddPetForm extends React.Component {
                 container
                 alignItems="center"
                 direction="row"
-                justify="space-between"
+                justify="space-around"
               >
                 <Grid item xs={3}>
                   <span>(*) Datos obligatorios.</span>
