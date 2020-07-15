@@ -125,7 +125,7 @@ class ConsultationForm extends React.Component {
                 container
                 alignItems="center"
                 direction="row"
-                justify="space-between"
+                justify="space-around"
               >
                 <Grid item xs={5}>
                   <span>(*) Datos obligatorios.</span>

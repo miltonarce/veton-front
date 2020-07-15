@@ -7,7 +7,7 @@ const GridList = styled(Grid)({
 });
 
 const styles = {
-    listStyle: "none"
+    listStyle: "none",
 };
 
 export {

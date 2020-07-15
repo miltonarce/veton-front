@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { AppContext } from "../../../Store";
+import clsx from 'clsx';
 import {
   AppBar,
   Toolbar,
@@ -9,6 +10,11 @@ import {
   Menu,
   MenuItem,
   Avatar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  Divider
 } from "@material-ui/core";
 import {
   Pets,
@@ -16,28 +22,120 @@ import {
   StoreOutlined,
   HomeOutlined,
 } from "@material-ui/icons";
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import {URL_IMAGES} from "../../../Utils/globals";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    })
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    background: "white"
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    color: "#ff2e93",
+    ['@media (min-width: 960px)']: { 
+      display: 'none'
+      }
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    justifyContent: 'flex-end',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+  listItem:{
+    marginTop: "1.5rem",
+  }
+}));
 
 const Header = ({ classes }) => {
+  const classes2 = useStyles();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = event => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
   const dataUser = React.useContext(AppContext);
   const {user} = dataUser.auth;
   const userImage = user.image;
+ 
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpenMenu = () => {
+    setOpen(true);
+  };
+
+  const handleCloseMenu = () => {
+    setOpen(false);
+  };
 
   return (
+    <>
     <AppBar position="static">
       <nav>
         <Toolbar className={classes.Appbar}>
-          <Container fixed className={classes.ContainerFlex}>
-            <div className={classes.ContentLogo}>
+        <IconButton
+            color="inherit"
+            aria-label="open menu"
+            onClick={handleOpenMenu}
+            edge="start"
+            className={clsx(classes2.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <div className={classes.ContentLogo}>
               <Typography noWrap className={classes.Logo} variant="h1">
                 Vet On
               </Typography>
             </div>
+          <Container fixed className={classes.ContainerFlex}>
+          <div className={classes.ContentLogo}></div>
             <Link className={classes.ContentLink} to="/user">
               <HomeOutlined className={classes.Icons} />
               Inicio
@@ -50,7 +148,8 @@ const Header = ({ classes }) => {
               <Pets className={classes.Icons} />
               Mascotas
             </Link>
-            <div className={classes.ContentWelcome}>
+          </Container>
+          <div className={classes.ContentWelcome}>
               <p>Bienvenido/a:</p>
               <p className={classes.ContentUserData}>{user.email}</p>
             </div>
@@ -91,10 +190,47 @@ const Header = ({ classes }) => {
                 </Link>
               </Menu>
             </div>
-          </Container>
+         
         </Toolbar>
       </nav>
     </AppBar>
+    <Drawer
+    className={classes.drawer}
+    variant="persistent"
+    anchor="left"
+    open={open}
+    classes={{
+      paper: classes.drawerPaper,
+    }}
+  >
+    <div className={classes.drawerHeader} style={{display: "flex", justifyContent: "flex-end"}}>
+      <IconButton onClick={handleCloseMenu}>
+        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+      </IconButton>
+    </div>
+    <Divider />
+    <List>
+        <ListItem button key={1} className={classes2.listItem}>
+        <Link className={classes.ContentLink} to="/user" onClick={handleCloseMenu}>
+              <HomeOutlined className={classes.Icons} />
+              Inicio
+            </Link>
+        </ListItem>
+        <ListItem button key={2} className={classes2.listItem} >
+            <Link className={classes.ContentLink} to="/user/appointments" onClick={handleCloseMenu}>
+              <StoreOutlined className={classes.Icons} />
+              Turnos
+            </Link>
+            </ListItem>
+            <ListItem button key={3} className={classes2.listItem} >
+            <Link className={classes.ContentLink} to="/user/pets" onClick={handleCloseMenu}>
+              <Pets className={classes.Icons} />
+              Mascotas
+            </Link>
+            </ListItem>
+    </List>
+  </Drawer>
+  </>
   );
 };
 

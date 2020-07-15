@@ -13,6 +13,8 @@ import Appointments from "./Appointments";
 import AddAppointment from "./AddAppointment";
 import Header from "../../Components/Shared/Header";
 import Footer from "../../Components/Shared/Footer";
+import {URL_IMAGES_ASSETS} from "../../Utils/globals";
+
 
 const ContentMain = styled("div")({
   width: "100%",
@@ -21,7 +23,7 @@ const ContentMain = styled("div")({
   position: "absolute",
   height: "100vh",
   overflowX: "hidden",
-  backgroundImage: "url('assets/pattern-veton2.png')",
+  backgroundImage:`url('${URL_IMAGES_ASSETS}assets/pattern-veton2.png')`,
   backgroundSize: "cover",
 });
 

@@ -53,6 +53,7 @@ const EditConsultation = props => {
    * @returns {void}
    */
   const handleOnSubmit = async dataEdited => {
+    setValues({ ...values, isLoading: true });
     try {
       const { data } = await ApiVet.consultations.edit(
         values.dataConsultation.id_consultation,
@@ -65,14 +66,13 @@ const EditConsultation = props => {
         enqueueSnackbar(data.msg, { variant: "success" });
       } else {
         enqueueSnackbar(data.msg, { variant: "error" });
+        setValues({ ...values, isLoading: false });
       }
-      setTimeout(() => {
         props.history.goBack();
-      }, 3000);
     } catch (err) {
       if (err.response && err.response.data) {
         const { errors } = err.response.data;
-        setValues({ ...values, errors });
+        setValues({ ...values, errors, isLoading: false });
       }
     }
   };
@@ -88,7 +88,16 @@ const EditConsultation = props => {
         <Grid container alignItems="center" direction="row" justify="center">
           <Grid item xs={7}>
             {values.isLoading ? (
-              <CircularProgress color="secondary" />
+              <Container fixed>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                justify="center"
+              >
+                <CircularProgress color="secondary" />
+              </Grid>
+            </Container>
             ) : (
                 <EditConsultationForm
                   data={values.dataConsultation}

@@ -48,6 +48,16 @@ const theme = createMuiTheme({
         borderRadius: "5rem",
       },
     },
+    MuiPickersBasePicker:{
+      pickerView: {
+      minWidth: "none"
+    }
+    },
+    MuiPickersStaticWrapper:{
+      staticWrapperRoot:{
+        minWidth: "none"
+      } 
+    }
   },
 });
 

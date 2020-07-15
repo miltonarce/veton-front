@@ -45,12 +45,10 @@ class Login extends Component {
           hasError: msg,
           openError: true,
         });
-        setTimeout(() => {
           this.setState({
             ...state,
             openMsg: false,
           });
-        }, 2000);
       }
     } catch (err) {
       this.setState({
@@ -59,12 +57,10 @@ class Login extends Component {
         openError: true,
         hasError: err,
       });
-      setTimeout(() => {
         this.setState({
           ...state,
           openMsg: false,
         });
-      }, 2000);
     }
   };
 
@@ -76,7 +72,7 @@ class Login extends Component {
       <div className={classes.Content}>
         <CssBaseline />
         <Grid container alignItems="center" direction="row" justify="center">
-          <Grid item lg={6} md={10} xs={9} className={classes.contentPaper}>
+          <Grid item lg={6} md={10} xs={10} className={classes.contentPaper}>
             <Paper className={classes.PaperLogin}>
               <Grid
                 container

@@ -43,14 +43,14 @@ const AppointmentDatePickerUser = ({ idUser }) => {
   }, []);
 
   return (
-    <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils}>
-      <DatePicker autoOk value={date} variant="static" onChange={changeDate} renderDay={(day, _selectedDate, _isInCurrentMonth, dayComponent) => {
+    <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils} >
+      <DatePicker autoOk value={date} variant="static" onChange={changeDate} style={{width: "200px"}} renderDay={(day, _selectedDate, _isInCurrentMonth, dayComponent) => {
         const dateDatepicker = moment(day).format("YYYY-MM-DD");
         const isAppointmentForUser = appointments.includes(dateDatepicker);
         if (isAppointmentForUser) {
           return (
             <Link to="/user/appointments">
-              <Badge badgeContent="Turno" className={classes.Badge} color="secondary" style={{ backgroundColor: "#ddd", borderRadius: "50%"}}>
+              <Badge badgeContent="Turno" className={classes.Badge} color="secondary" style={{ backgroundColor: "#ddd", borderRadius: "80%"}}>
                 {dayComponent}
               </Badge>
             </Link>
