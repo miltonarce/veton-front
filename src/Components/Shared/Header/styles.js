@@ -71,7 +71,7 @@ export default {
         marginRight: "10px",
     },
     ContentAvatar:{
-        border: "1.5px solid #FF2E93",
+        border: "2px solid #FF2E93",
         padding: "3px",
         "& img": {
             borderRadius: "50%"
