@@ -29,7 +29,7 @@ const Vet = ({ id_veterinary, business_name, last_name, image, cuit_cuil, phone1
           alt={business_name}
           component="img"
           src={
-            image ? `http://localhost/veton/veton-back/public/imgs/${image}` : "/assets/no-image.png"
+            image ? `${URL_IMAGES}/imgs/${image}` : "/assets/no-image.png"
           }
           title={`Veterinaria ${business_name}`}
         />
