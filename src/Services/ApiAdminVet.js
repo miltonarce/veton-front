@@ -17,5 +17,8 @@ export default {
   },
   doctorVet: {
     fetch: idVet => axiosInstance.get(`/users/vet/${idVet}`),
+  },
+  consultations: {
+    fetch: idUser => axiosInstance.get(`/consultations/veterinary/${idUser}/statistics`),
   }
 };

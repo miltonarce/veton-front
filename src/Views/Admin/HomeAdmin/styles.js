@@ -16,6 +16,10 @@ export {
 };
 
 export default {
+    Paper: {
+        borderRadius: "23px",
+        padding: "1rem",
+    },
     title: {
         color: "#5C2299",
         fontSize: "2rem",
