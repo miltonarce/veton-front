@@ -1,11 +1,10 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import { AppointmentDatePickerUser } from "../../../Components/Appointments";
+import {Container, Grid, CircularProgress, Paper} from "@material-ui/core";
+import {withStyles} from "@material-ui/core/styles";
 import PercentageConsultation  from "../../../Components/Consultations/PercentageConsultation";
 import TitlePages from "../../../Components/Shared/TitlePages";
-import { AppContext } from "../../../Store";
-import { Api } from "../../../Services";
+import {AppContext} from "../../../Store";
+import {ApiAdminVet} from "../../../Services";
 import styles from "./styles";
 
 class HomeAdmin extends React.Component {
@@ -19,55 +18,82 @@ class HomeAdmin extends React.Component {
 
   async componentDidMount() {
     try {
-      this.setState({ ...this.state, isLoading: true });
+      this.setState({...this.state, isLoading: true});
       const {
-        auth: { user },
+        auth: {user},
       } = this.context;
-      const { data } = await Api.statistics.fetch(user.id_user);
-      if (data.success) {
-        this.setState({ ...this.state, statistics: data.data });
+      const {data} = await ApiAdminVet.consultations.fetch(user.id_user);
+       if (data.success) {
+        let result = [];
+
+        data.data.map(v => {
+          let c = result.find(r => r.name === v.Veterinaria);
+          if (c) {
+           let newResult = result.filter(e => c.name !== e.name);
+            result = newResult;
+            c.data.push(v.Cant);
+            result = result.concat(c)
+          } else {
+            result = [...result, {name: v.Veterinaria, data: [v.Cant]}];
+          }
+        });
+
+        this.setState({...this.state, statistics: result, isLoading: false});
       } else {
-        this.setState({ ...this.state, statistics: [] });
+        this.setState({...this.state, statistics: []});
       }
     } catch (err) {
-      this.setState({ ...this.state, statistics: [] });
+      this.setState({...this.state, statistics: []});
     }
   }
 
   render() {
-    const { statistics } = this.state;
-    const { classes } = this.props;
+    const {statistics, isLoading} = this.state;
+    const {classes} = this.props;
     const {
-      auth: { user },
+      auth: {user},
     } = this.context;
     return (
       <>
-        <Container fixed style={{ padingTop: "20px !important" }} component="section">
+        <Container
+          fixed
+          component="section"
+          style={{padingTop: "20px !important"}}
+        >
           <TitlePages
-            subtitle="Aquí podrás encontrar información relevante sobre todas tus mascotas"
+            subtitle="Aquí podrás encontrar la cantidad de consultas por mes de tus veterinarias"
             title="Inicio"
           />
-          <Grid
-            container
-            className={classes.paddingTop}
-            direction="row"
-            justify="center"
-            spacing={2}
-          >
-            
-            <Grid item md={9} xs={12}>
-              {statistics.length > 0 ? (
-                <PercentageConsultation
-                  statistics={statistics}
-                  title="Cantidad de consultas"
-                />
-              ) : (
+          <Paper className={classes.Paper}>
+            <Grid
+              container
+              className={classes.paddingTop}
+              direction="row"
+              justify="center"
+              spacing={2}
+              style={{marginTop: "3rem"}}
+            >
+              <Grid item md={9} xs={12}>
+                {isLoading ? <Container fixed>
+                    <Grid
+                      container
+                      alignItems="center"
+                      direction="row"
+                      justify="center"
+                    >
+                      <CircularProgress color="secondary" />
+                    </Grid>
+                  </Container>
+                : statistics.length > 0 ? 
+                  <PercentageConsultation series={statistics} />
+                : 
                   <section className={classes.marginNot}>
-                    <p>No hay mascotas registradas para mostrar estadisticas.</p>
+                    <p>No hay consultas registradas para mostrar estadisticas.</p>
                   </section>
-                )}
+                }
+              </Grid>
             </Grid>
-          </Grid>
+          </Paper>
         </Container>
       </>
     );
