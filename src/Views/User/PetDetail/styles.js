@@ -87,6 +87,6 @@ export default {
         marginTop: "200px",
     },
     comment: {
-        wordBreak: "break-all",
+        wordBreak: "break-word",
     },
 };
