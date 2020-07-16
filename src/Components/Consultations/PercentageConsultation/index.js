@@ -4,7 +4,6 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 const PercentageArea = ({ series }) => {
-  console.log(series)
   Highcharts.setOptions({
     colors: [
       "#4A2FBA",
