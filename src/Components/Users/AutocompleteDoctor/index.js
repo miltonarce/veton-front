@@ -52,25 +52,26 @@ class AutocompleteDoctor extends React.Component {
         this.setState({ ...this.state, loading: true });
         
         const {data} = await ApiVet.users.autocompleteDoctor(value);
-        
-        data.forEach(k => {
-          if (this.state.docsListWorking.some(d => d.dni === k.dni)){
-            data.map(function(e){
-              e.working = "yes";
-            });
-            this.setState({ ...this.state, users: data, loading: false });
-          }else {
-            data.map(function(e){
-              e.working = "no";
-            });
-            this.setState({ ...this.state, users: data, loading: false });
-          }
-        });
+        if(data.length > 0){
+
+          const dataUser = data.map(u => {
+            if (this.state.docsListWorking.some(d => d.dni === u.dni)){
+              return {...u ,working: "yes"};
+            }else{
+              return {...u ,working: "no"};
+            }
+          });
+
+          this.setState({...this.state, users: dataUser, loading: false});
+
+      }else{
+        this.setState({ ...this.state, users: [], loading: false });
+      }
       } catch (err) {
         this.setState({ ...this.state, users: [], loading: false });
       }
     } else {
-      this.setState({ ...this.state, users: [] });
+      this.setState({ ...this.state, users: [], });
     }
   }
 
@@ -87,9 +88,9 @@ class AutocompleteDoctor extends React.Component {
       idUser,
       idVet,
     };
-
+    // this.setState({...this.state, loading: true, user: []});
     try {
-      this.setState({...this.state, loading: true});
+     this.setState({...this.state, loading: true});
       const {data} = await ApiVet.veterinaries.createDocBySearch(request);
       if (data.success) {
         this.setState({
@@ -185,6 +186,23 @@ class AutocompleteDoctor extends React.Component {
               </InputAdornment>
             ),
             disableUnderline: true,
+            endAdornment: (
+              <InputAdornment position="start">
+              {loading && (
+                <Container fixed>
+                  <Grid
+                    container
+                    alignItems="center"
+                    className={classes.spinner}
+                    direction="row"
+                    justify="center"
+                  >
+                    <CircularProgress color="secondary" size={20}/>
+                  </Grid>
+                </Container>
+              )}
+              </InputAdornment>
+            )
           }}
           placeholder={placeholder}
           onBlur={handleFocus}
@@ -192,19 +210,7 @@ class AutocompleteDoctor extends React.Component {
           onFocus={handleFocus}
         />
         <label htmlFor="autocomplete_veton" style={{visibility: "hidden"}} />
-        {loading && (
-          <Container fixed>
-            <Grid
-              container
-              alignItems="center"
-              className={classes.spinner}
-              direction="row"
-              justify="center"
-            >
-              <CircularProgress color="secondary" />
-            </Grid>
-          </Container>
-        )}
+        
         <ListItemUsersDoctor users={users} onUserSelected={handleUserSelected} />
       </>
     );

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
-import {Grid, Button, Avatar, Paper, Typography} from "@material-ui/core";
+import {Grid, Button, Avatar, Paper, Typography, Container, CircularProgress} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {ApiVet, ApiAdminVet} from "../../../Services";
 import {ModalMsg, Spinner} from "../../Notifications";
@@ -24,7 +24,7 @@ class AddVetForm extends Component {
     },
     previewImage: null,
     imageSrc: null,
-    isLoading: false,
+    isLoading: true,
     hasMsg: null,
     openMsg: false,
     success: false,
@@ -152,6 +152,21 @@ class AddVetForm extends Component {
       previewImage,
     } = this.state;
     const {handleSubmit, handleOnChange, handleInputFile} = this;
+    if(isLoading){
+      return (
+        <Container fixed>
+        <Grid
+          container
+          alignItems="center"
+          className={classes.spinner}
+          direction="row"
+          justify="center"
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      </Container>
+      )
+    }
     return (
       <ValidatorForm ref="form" onSubmit={handleSubmit}>
         <Paper className={classes.Paper}>
@@ -248,7 +263,7 @@ class AddVetForm extends Component {
                     <Avatar
                       alt="Preview vet"
                       className={classes.avatar}
-                      src={`${URL_IMAGES}${formData.image}`}
+                      src={formData.image ? `${URL_IMAGES}${formData.image}`: "/assets/no-image.png"}
                     />
                 </Grid>
                 }

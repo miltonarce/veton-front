@@ -17,6 +17,7 @@ const CardDoc = styled(Card)({
     borderRadius: "23px",
     overflow: "visible",
     boxShadow: "00px 3px 50px -27px rgba(0,0,0,0.75)",
+    marginBottom: "2rem"
 });
 
 const CardDocMedia = styled(CardMedia)({
@@ -27,6 +28,7 @@ const CardDocMedia = styled(CardMedia)({
     top: "-14px",
     left: "46px",
     boxShadow: "0px 3px 11px 5px rgba(0, 0, 0, 0.16)",
+    objectFit: "cover"
 });
 
 const ContentMedia = styled("figure")({

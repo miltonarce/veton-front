@@ -52,6 +52,26 @@ class HomeVet extends React.Component {
               veterinariesForUser: [],
             });
           }
+
+          if(veterinary_id){
+ 
+            const {
+            data: { success, pets },
+          } = await Api.pets.lastPetsByVet(user.id_user, veterinary_id);
+          if (success) {
+            this.setState({
+              ...this.state,
+              isLoadingLastPets: false,
+              lastPetsAttended: pets,
+            });
+          } else {
+            this.setState({
+              ...this.state,
+              isLoadingLastPets: false,
+              lastPetsAttended: [],
+            });
+          }
+        }
     } catch (err) {
       console.error("err", err);
       this.setState({
@@ -143,8 +163,7 @@ class HomeVet extends React.Component {
 
     const {veterinariesForUser} = this.state;
 
-    console.log(petsByUser);
-
+console.log("jaja", lastPetsAttended)
     if(!veterinary_id){
       return (
         <>
@@ -200,7 +219,17 @@ class HomeVet extends React.Component {
                   <h2 className={classes.title}>
                     Mascotas del usuario {userSelected.name}
                   </h2>
-                  {isLoading && <CircularProgress />}
+                  {isLoading && <Container fixed>
+                  <Grid
+                    container
+                    alignItems="center"
+                    className={classes.spinner}
+                    direction="row"
+                    justify="center"
+                  >
+                    <CircularProgress color="secondary" />
+                  </Grid>
+                </Container>}
                   {!isLoading && petsByUser.length > 0 && (
                     <ListPets pets={petsByUser} />
                   )}

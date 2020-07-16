@@ -133,7 +133,7 @@ class VetDetail extends React.Component {
                           src={
                             dataVet.image
                               ? `${URL_IMAGES}${dataVet.image}`
-                              : "https://via.placeholder.com/300x200"
+                              :  "/assets/no-image.png"
                           }
                         />
                       </Grid>
