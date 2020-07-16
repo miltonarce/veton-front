@@ -146,16 +146,18 @@ class HistoryForm extends React.Component {
                     multiple
                     onChange={handleInputFile}
                     className={classes.InputFile}
-                  />
+                  />   
+                  <Grid container>
                   {previewImage.length >= 1 && previewImage.map(i =>  (
-                    <Grid container>
+                 
                       <Avatar
                         alt="Preview pet"
                         className={classes.avatar}
                         src={i}
                       />
-                    </Grid>
-                  ))}
+                   
+                  ))} 
+                  </Grid>
                 </Grid>
             <Grid item className={classes.GridButton} xs={12}>
               <Grid
