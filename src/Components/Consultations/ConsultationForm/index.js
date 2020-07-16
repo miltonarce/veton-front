@@ -11,8 +11,8 @@ class ConsultationForm extends React.Component {
       comments: "",
       id_user: null,
       afflictions_procedures: "",
-      id_vaccine: "ninguna",
-      id_dewormer: "ninguno",
+      id_vaccine: null,
+      id_dewormer: null
     },
   };
 
