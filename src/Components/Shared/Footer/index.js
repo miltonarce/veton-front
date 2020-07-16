@@ -37,17 +37,17 @@ const Footer = () => {
             >
               <ul className={classes.Rs}>
                 <li>
-                  <Link className={classes.Link} href="https://www.facebook.com/veton" title="Seguinos en facebook!">
+                  <Link className={classes.Link} href="https://www.facebook.com/VetOn-100837628384733" title="Seguinos en facebook!">
                     <img alt="Red social FB" src="/assets/facebook.png" />
                   </Link>
                 </li>
                 <li>
-                  <Link className={classes.Link} href="https://www.twitter.com/veton" title="Seguinos en twitter!">
+                  <Link className={classes.Link} href="https://twitter.com/VetOn2020" title="Seguinos en twitter!">
                     <img alt="Red social TW" src="/assets/twitter.png" />
                   </Link>
                 </li>
                 <li>
-                  <Link className={classes.Link} href="https://www.instagram.com/veton" title="Seguinos en instagram!">
+                  <Link className={classes.Link} href="https://www.instagram.com/veton224/" title="Seguinos en instagram!">
                     <img alt="Red social IG" src="/assets/instagram.png" />
                   </Link>
                 </li>
