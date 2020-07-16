@@ -11,8 +11,8 @@ class ConsultationForm extends React.Component {
       comments: "",
       id_user: null,
       afflictions_procedures: "",
-      id_vaccine: "ninguna",
-      id_dewormer: "ninguno",
+      id_vaccine: "16",
+      id_dewormer: "8",
     },
   };
 
@@ -33,6 +33,7 @@ class ConsultationForm extends React.Component {
     const { props, state } = this;
     event.preventDefault();
     props.onSubmit(state.form);
+    console.log(state.form)
   };
 
   /**
@@ -102,8 +103,7 @@ class ConsultationForm extends React.Component {
                   className={classes.Select}
                   onChange={handleOnChange}
                 >
-                  <MenuItem value="ninguna">Ninguna</MenuItem>  
-                    {vaccinesData.map(v =>  <MenuItem key={v.id_vaccine} value={v.id_vaccine}>{v.name}</MenuItem>)}
+                  {vaccinesData.map(v =>  <MenuItem key={v.id_vaccine} value={v.id_vaccine}>{v.name}</MenuItem>)}
                 </Select>
             </Grid>
             <Grid item xs={12} className={classes.GridButton}>
@@ -116,8 +116,7 @@ class ConsultationForm extends React.Component {
                   className={classes.Select}
                   onChange={handleOnChange}
                 >
-                  <MenuItem value="ninguno">Ninguno</MenuItem>  
-                    {dewormersData.map(d =>  <MenuItem key={d.id_dewormer} value={d.id_dewormer}>{d.name}</MenuItem>)}
+                  {dewormersData.map(d =>  <MenuItem key={d.id_dewormer} value={d.id_dewormer}>{d.name}</MenuItem>)}
                 </Select>
             </Grid>
             <Grid item className={classes.GridButton} xs={12}>
