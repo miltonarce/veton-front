@@ -61,6 +61,7 @@ export default {
         backgroundColor: "#fff",
         borderRadius: "23px",
         padding: "0 10px",
+        width: "400px"
     },
     Icons: {
         verticalAlign: "text-bottom",

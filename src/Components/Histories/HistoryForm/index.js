@@ -4,7 +4,7 @@ import { Paper, Typography, Grid, TextField, Button, FormHelperText, Avatar } fr
 import { withStyles } from "@material-ui/core/styles";
 import { InvalidField } from "../../Notifications";
 import styles from "./styles";
-import { TransitEnterexitRounded } from "@material-ui/icons";
+import { CloudUploadOutlined } from "@material-ui/icons";
 
 class HistoryForm extends React.Component {
   state = {
@@ -135,6 +135,9 @@ class HistoryForm extends React.Component {
             </Grid>
             <Grid item xs={12}><label className={classes.Label}>Agregar imágenes a la historia clínica</label></Grid>
             <Grid item xs={12}>
+            <label htmlFor="imagePet" className={classes.LabelUpload}>
+                  <CloudUploadOutlined className={classes.IconUpload} /> Subir archivo
+                </label>
                   <input
                     accept=".jpg,.jpeg,.png"
                     id="imagePet"
@@ -142,16 +145,19 @@ class HistoryForm extends React.Component {
                     type="file"
                     multiple
                     onChange={handleInputFile}
-                  />
+                    className={classes.InputFile}
+                  />   
+                  <Grid container>
                   {previewImage.length >= 1 && previewImage.map(i =>  (
-                    <Grid container>
+                 
                       <Avatar
                         alt="Preview pet"
                         className={classes.avatar}
                         src={i}
                       />
-                    </Grid>
-                  ))}
+                   
+                  ))} 
+                  </Grid>
                 </Grid>
             <Grid item className={classes.GridButton} xs={12}>
               <Grid

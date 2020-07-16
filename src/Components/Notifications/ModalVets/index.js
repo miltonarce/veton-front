@@ -80,7 +80,7 @@ const ModalVets = ({  onClickConfirm, data }) => {
                                 <img  className={classes.ImageVet} src={
                             v.image
                               ? `${URL_IMAGES}${v.image}`
-                              : "https://via.placeholder.com/300x200"
+                              :  "/assets/no-image.png"
                           } alt={v.business_name} />
                             </figure>
                         <p className={classes.nameVet}>{v.fantasy_name}</p>

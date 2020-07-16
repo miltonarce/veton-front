@@ -6,6 +6,7 @@ import {withStyles} from "@material-ui/core/styles";
 import {ApiVet} from "../../../Services";
 import {ModalMsg, Spinner} from "../../Notifications";
 import styles from "./styles";
+import { CloudUploadOutlined } from '@material-ui/icons';
 
 class AddVetForm extends Component {
   state = {
@@ -231,13 +232,18 @@ class AddVetForm extends Component {
               justify="space-around"
               spacing={3}
             >
-              <Grid item xs={6}>
+              <Grid item xs={12}>
+              <label className={classes.Label}>Agregar una imágen</label>
+                <label htmlFor="imagePet" className={classes.LabelUpload}>
+                  <CloudUploadOutlined className={classes.IconUpload} /> Subir archivo
+                </label>
                 <input
                   accept=".jpg,.jpeg,.png"
                   id="imagePet"
                   name="image"
                   type="file"
                   onChange={handleInputFile}
+                  className={classes.InputFile}
                 />
                 {previewImage && (
                   <Grid container>

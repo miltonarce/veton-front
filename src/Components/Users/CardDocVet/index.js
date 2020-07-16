@@ -13,6 +13,7 @@ import {
   TextTypo,
   CardPaper,
 } from "./styles";
+import {URL_IMAGES} from "../../../Utils/globals";
 
 class CardDocVet extends Component {
   state = {
@@ -46,6 +47,10 @@ class CardDocVet extends Component {
           success: data.success,
         });
         setTimeout(() => {
+          this.setState({
+            ...state,
+            openMsg: false
+          });
           onDoctorDeactivate();
         }, 1500);
       } else {
@@ -93,7 +98,7 @@ class CardDocVet extends Component {
             component="img"
             src={
               image
-                ? `http://localhost/veton/veton-back/public/imgs/${image}`
+                ? `${URL_IMAGES}${image}`
                 : "/assets/no-image.png"
             }
             title={`Doctor ${last_name}`}

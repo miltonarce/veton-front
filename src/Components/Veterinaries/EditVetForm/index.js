@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
-import {Grid, Button, Avatar, Paper, Typography} from "@material-ui/core";
+import {Grid, Button, Avatar, Paper, Typography, Container, CircularProgress} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {ApiVet, ApiAdminVet} from "../../../Services";
 import {ModalMsg, Spinner} from "../../Notifications";
 import {URL_IMAGES} from "../../../Utils/globals";
 import styles from "./styles";
+import { CloudUploadOutlined } from '@material-ui/icons';
 
 class AddVetForm extends Component {
 
@@ -23,7 +24,7 @@ class AddVetForm extends Component {
     },
     previewImage: null,
     imageSrc: null,
-    isLoading: false,
+    isLoading: true,
     hasMsg: null,
     openMsg: false,
     success: false,
@@ -151,6 +152,21 @@ class AddVetForm extends Component {
       previewImage,
     } = this.state;
     const {handleSubmit, handleOnChange, handleInputFile} = this;
+    if(isLoading){
+      return (
+        <Container fixed>
+        <Grid
+          container
+          alignItems="center"
+          className={classes.spinner}
+          direction="row"
+          justify="center"
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      </Container>
+      )
+    }
     return (
       <ValidatorForm ref="form" onSubmit={handleSubmit}>
         <Paper className={classes.Paper}>
@@ -219,7 +235,7 @@ class AddVetForm extends Component {
               justify="space-around"
               spacing={3}
             >
-              <Grid item xs={6} className={classes.ContainerInput}>
+              <Grid item xs={12} className={classes.ContainerInput}>
                 {previewImage ? 
                   <Grid container className={classes.ContainerImageTitle}>
                     <Typography
@@ -247,16 +263,21 @@ class AddVetForm extends Component {
                     <Avatar
                       alt="Preview vet"
                       className={classes.avatar}
-                      src={`${URL_IMAGES}${formData.image}`}
+                      src={formData.image ? `${URL_IMAGES}${formData.image}`: "/assets/no-image.png"}
                     />
                 </Grid>
                 }
+                <label className={classes.Label}>Agregar una imágen</label>
+                <label htmlFor="imagePet" className={classes.LabelUpload}>
+                  <CloudUploadOutlined className={classes.IconUpload} /> Subir archivo
+                </label>
                 <input
                   accept=".jpg,.jpeg,.png"
                   id="imagePet"
                   name="image"
                   type="file"
                   onChange={handleInputFile}
+                  className={classes.InputFile}
                 />
               </Grid>
             </Grid>

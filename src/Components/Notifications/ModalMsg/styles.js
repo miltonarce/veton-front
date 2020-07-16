@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     root: {
-        position: "absolute",
+        position: "fixed",
         zIndex: "2",
         top: 0,
         bottom: 0,
