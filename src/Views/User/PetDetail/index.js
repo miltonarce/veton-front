@@ -114,7 +114,7 @@ class PetDetail extends React.Component {
                           src={
                             dataPet.image
                               ? `${URL_IMAGES}${dataPet.image}`
-                              : "https://via.placeholder.com/300x200"
+                              :  "/assets/no-image.png"
                           }
                         />
                       </Grid>

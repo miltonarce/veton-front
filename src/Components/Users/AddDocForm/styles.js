@@ -15,6 +15,7 @@ export default {
         padding: "2rem",
         borderRadius: "23px",
         marginTop: "2rem",
+        marginBottom: "2rem"
     },
     TitleForm: {
         fontWeight: 500,

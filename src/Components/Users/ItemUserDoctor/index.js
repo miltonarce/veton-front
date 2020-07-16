@@ -21,7 +21,7 @@ const ItemUserDoctor = ({ name, last_name, email, image, onUserSelected, working
                 src={
                     image
                         ? `${URL_IMAGES}${image}`
-                        : "https://via.placeholder.com/300x200"
+                        :  "/assets/no-image.png"
                 }
             />
         </ListItemAvatar>

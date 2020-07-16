@@ -5,6 +5,7 @@ import useStyles from "./styles";
 
 const ListItemUsersDoctor = ({ users, onUserSelected }) => {
   const classes = useStyles();
+  console.log("LIST", users);
   return (
     <List className={classes.root} component="nav">
       {users.map((user, index) => (

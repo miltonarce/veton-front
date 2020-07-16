@@ -7,6 +7,7 @@ import ModalConsultation from "../ModalConsultation";
 import useStyles from "./styles";
 
 const Consultation = ({ dataConsultation, user }) => {
+  console.log("consulta", dataConsultation)
   const classes = useStyles();
   const [values, setValues] = React.useState({
     id_consultation: dataConsultation.id_consultation,

@@ -72,6 +72,23 @@ class Autocomplete extends React.Component {
               </InputAdornment>
             ),
             disableUnderline: true,
+            endAdornment: (
+              <InputAdornment position="start">
+              {loading && (
+                <Container fixed>
+                  <Grid
+                    container
+                    alignItems="center"
+                    className={classes.spinner}
+                    direction="row"
+                    justify="center"
+                  >
+                    <CircularProgress color="secondary" size={20}/>
+                  </Grid>
+                </Container>
+              )}
+              </InputAdornment>
+            )
           }}
           placeholder={placeholder}
           onBlur={handleFocus}
@@ -79,19 +96,6 @@ class Autocomplete extends React.Component {
           onFocus={handleFocus}
         />
         <label htmlFor="autocomplete_veton" style={{visibility: "hidden"}} />
-        {loading && (
-          <Container fixed>
-            <Grid
-              container
-              alignItems="center"
-              className={classes.spinner}
-              direction="row"
-              justify="center"
-            >
-              <CircularProgress color="secondary" />
-            </Grid>
-          </Container>
-        )}
         <ListItemUsers users={users} onUserSelected={handleUserSelected} />
       </>
     );

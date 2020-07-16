@@ -220,7 +220,7 @@ class AppointmentForm extends React.Component {
                         src={
                           option.image
                             ? `${URL_IMAGES}${option.image}`
-                            : "https://via.placeholder.com/300x200"
+                            :  "/assets/no-image.png"
                         }
                       />
                     </ListItemAvatar>
